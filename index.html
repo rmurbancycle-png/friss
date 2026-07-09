@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRISS MVP - venta online VALLADOLID</title>
+    <title>FRISS MVP - VENTA ONLINE</title>
     <style>
         :root {
             --primary: #e67e22;
@@ -25,16 +25,19 @@
         
         h2 { margin-top: 0; font-size: 20px; border-bottom: 2px solid #edf2f7; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         
+        .comercio-seccion { margin-bottom: 25px; }
+        .comercio-titulo { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #34495e; border-left: 4px solid var(--primary); padding-left: 8px; }
+        .pantalla.comercio .comercio-titulo { border-left-color: var(--success); }
+        
         /* Tarjetas de Producto */
-        .comercio-seccion { margin-bottom: 20px; }
-        .comercio-titulo { font-weight: bold; font-size: 16px; margin-bottom: 8px; color: #34495e; display: flex; align-items: center; gap: 5px; }
-        .producto-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; margin-bottom: 10px; display: flex; gap: 12px; align-items: center; cursor: pointer; transition: all 0.2s; }
+        .productos-grid { display: flex; flex-direction: column; gap: 10px; }
+        .producto-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; display: flex; gap: 12px; align-items: center; cursor: pointer; transition: all 0.2s; }
         .producto-card:hover { border-color: var(--primary); background: #fffaf5; }
-        .producto-card img { width: 65px; height: 65px; border-radius: 8px; object-fit: cover; }
+        .producto-card img { width: 55px; height: 55px; border-radius: 8px; object-fit: cover; }
         .producto-info { flex: 1; }
-        .producto-info h4 { margin: 0 0 4px 0; font-size: 14px; }
+        .producto-info h4 { margin: 0 0 4px 0; font-size: 14px; color: var(--dark); }
         .producto-info p { margin: 0; font-size: 12px; color: #7f8c8d; }
-        .precio { font-weight: bold; color: var(--primary); font-size: 14px; }
+        .precio { font-weight: bold; color: var(--primary); font-size: 14px; white-space: nowrap; }
         
         /* Formulario e Inputs */
         .input-group { margin-top: 15px; }
@@ -67,166 +70,65 @@
 
         <div class="pantalla">
             <h2>📱 App Cliente</h2>
-
             
             <div class="comercio-seccion">
-                <div class="comercio-titulo">🥩 Mercado del Val (El de toda la vida)</div>
-                <div class="producto-card" onclick="toggleCheck('chk1')">
-                    <input type="checkbox" id="chk1" value="Mercado del Val|melocotones|8.95" onchange="calcularTotal()">
-                    <img src="https://images.unsplash.com/photo-1626202353344-93c316719b26?w=150&auto=format&fit=crop&q=60" alt="Ibérico">
-                    <div class="producto-info">
-                        <h4>Melocotones</h4>
-                        <p>Melocotones.</p>
-                    </div>
-                    <div class="precio">8.95€</div>
-                </div>
-            </div>
-
+                <div class="comercio-titulo">🥩 Mercado del Val (Mercado de Abastos)</div>
+                <div class="productos-grid">
+                    
             
             <div class="comercio-seccion">
-                <div class="comercio-titulo">🥩 Mesetarios (Productos delicatessen)</div>
-                <div class="producto-card" onclick="toggleCheck('chk1')">
-                    <input type="checkbox" id="chk1" value="Mesetarios|Tabla Ibérica Selección|14.50" onchange="calcularTotal()">
-                    <img src="https://images.unsplash.com/photo-1626202353344-93c316719b26?w=150&auto=format&fit=crop&q=60" alt="Ibérico">
-                    <div class="producto-info">
-                        <h4>Tabla Ibérica Selección</h4>
-                        <p>Jamón de cebo, lomo y queso curado de la tierra.</p>
+                <div class="comercio-titulo">🥩 Mesetarios (Gourmet & Selección)</div>
+                <div class="productos-grid">
+                    
+                    <div class="producto-card" onclick="toggleCheck('chk_m1')">
+                        <input type="checkbox" id="chk_m1" data-precio="14.60" onchange="calcularTotal()">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=120&auto=format&fit=crop&q=60" alt="Vino">
+                        <div class="producto-info">
+                            <h4>Convento Las Claras Merlot 8M</h4>
+                            <p>D.O. Ribera del Duero</p>
+                        </div>
+                        <div class="precio">14,60 €</div>
                     </div>
-                    <div class="precio">14,50€</div>
+
+                    <div class="producto-card" onclick="toggleCheck('chk_m2')">
+                        <input type="checkbox" id="chk_m2" data-precio="27.50" onchange="calcularTotal()">
+                        <img src="https://images.unsplash.com/photo-1528822855841-e8014ec85439?w=120&auto=format&fit=crop&q=60" alt="Vino Emilio">
+                        <div class="producto-info">
+                            <h4>Emilio Moro VS</h4>
+                            <p>D.O. Ribera del Duero</p>
+                        </div>
+                        <div class="precio">27,50 €</div>
+                    </div>
+
+                    <div class="producto-card" onclick="toggleCheck('chk_m3')">
+                        <input type="checkbox" id="chk_m3" data-precio="34.00" onchange="calcularTotal()">
+                        <img src="https://images.unsplash.com/photo-1486297678162-ad2a1fa5384d?w=120&auto=format&fit=crop&q=60" alt="Queso">
+                        <div class="producto-info">
+                            <h4>Queso Junco</h4>
+                            <p>Granja Cantagrullas (Precio estimado/KG)</p>
+                        </div>
+                        <div class="precio">34,00 €</div>
+                    </div>
+
+                    <div class="producto-card" onclick="toggleCheck('chk_m4')">
+                        <input type="checkbox" id="chk_m4" data-precio="7.40" onchange="calcularTotal()">
+                        <img src="https://images.unsplash.com/photo-1547496502-affa22d38842?w=120&auto=format&fit=crop&q=60" alt="Conservas">
+                        <div class="producto-info">
+                            <h4>Pimientos Rellenos de Txangurro</h4>
+                            <p>Lukan Gourmet • 300 GR (Unidad)</p>
+                        </div>
+                        <div class="precio">7,40 €</div>
+                    </div>
+
                 </div>
             </div>
 
             <div class="comercio-seccion">
                 <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
-                <div class="producto-card" onclick="toggleCheck('chk2')">
-                    <input type="checkbox" id="chk2" value="Vegg's|Burguer Del Val Vegana|11.90" onchange="calcularTotal()">
-                    <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=150&auto=format&fit=crop&q=60" alt="Burger">
-                    <div class="producto-info">
-                        <h4>Burguer Del Val Vegana</h4>
-                        <p>Medallón artesanal, queso vegano fundido y salsa secreta.</p>
-                    </div>
-                    <div class="precio">11,90€</div>
-                </div>
-            </div>
-
-            <div class="comercio-seccion">
-                <div class="comercio-titulo">🍰 El Bombón (Pastelería)</div>
-                <div class="producto-card" onclick="toggleCheck('chk3')">
-                    <input type="checkbox" id="chk3" value="El Bombón|Pack 4 Pasteles de Nata|6.00" onchange="calcularTotal()">
-                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=150&auto=format&fit=crop&q=60" alt="Dulce">
-                    <div class="producto-info">
-                        <h4>Pack 4 Pasteles de Nata</h4>
-                        <p>Hojaldre crujiente y crema horneada al estilo tradicional.</p>
-                    </div>
-                    <div class="precio">6,00€</div>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>DIRECCIÓN DE ENTREGA EN VALLADOLID</label>
-                <input type="text" id="direccion" value="Calle Santiago, 14, Valladolid">
-            </div>
-
-            <div class="total-box">
-                <span>Total Cesta:</span>
-                <span id="totalTxt">0,00€</span>
-            </div>
-
-            <button onclick="lanzarPedido()">Enviar Pedido Combinado</button>
-        </div>
-
-        <div class="pantalla comercio">
-            <h2>🏪 Hub Mercado del Val</h2>
-            <div id="hubComercios" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
-                Monitoreando la pasarela de pedidos activos...
-            </div>
-        </div>
-
-        <div class="pantalla rider">
-            <h2>🛵 Valshopper Rider App</h2>
-            <div id="hubRider" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
-                Esperando la consolidación de rutas...
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        let pedidoActivo = null;
-
-        function toggleCheck(id) {
-            const chk = document.getElementById(id);
-            if (event.target.tagName !== 'INPUT') {
-                chk.checked = !chk.checked;
-            }
-            calcularTotal();
-        }
-
-        function calcularTotal() {
-            let total = 0;
-            if(document.getElementById('chk1').checked) total += 14.50;
-            if(document.getElementById('chk2').checked) total += 11.90;
-            if(document.getElementById('chk3').checked) total += 6.00;
-            document.getElementById('totalTxt').innerText = total.toFixed(2).replace('.', ',') + '€';
-        }
-
-        function lanzarPedido() {
-            const seleccionados = [];
-            if(document.getElementById('chk1').checked) seleccionados.push({ tienda: 'Mesetarios', item: 'Tabla Ibérica Selección' });
-            if(document.getElementById('chk2').checked) seleccionados.push({ tienda: "Vegg's", item: 'Burguer Del Val Vegana' });
-            if(document.getElementById('chk3').checked) seleccionados.push({ tienda: 'El Bombón', item: 'Pack 4 Pasteles de Nata' });
-
-            if(seleccionados.length === 0) {
-                alert("Selecciona al menos un comercio del Mercado del Val.");
-                return;
-            }
-
-            pedidoActivo = {
-                id: Math.floor(Math.random() * 800) + 100,
-                direccion: document.getElementById('direccion').value,
-                items: seleccionados,
-                estados: {}
-            };
-
-            seleccionados.forEach(i => pedidoActivo.estados[i.tienda] = 'Preparando');
-            renderizarPaneles('NUEVO');
-        }
-
-        function marcarListo(tienda) {
-            pedidoActivo.estados[tienda] = 'Listo';
-            const todosListos = Object.values(pedidoActivo.estados).every(e => e === 'Listo');
-            renderizarPaneles(todosListos ? 'LOGISTICA_RIDER' : 'ACTUALIZADO');
-        }
-
-        function entregarPedido() {
-            renderizarPaneles('ENTREGADO');
-        }
-
-        function renderizarPaneles(fase) {
-            if(!pedidoActivo) return;
-
-            // Render Panel Comercios
-            const hubC = document.getElementById('hubComercios');
-            if (fase !== 'ENTREGADO') {
-                let htmlC = `<div class="alerta-pedido"><p style="margin:0 0 10px 0; font-weight:bold;">📋 PEDIDO #${pedidoActivo.id}</p>`;
-                pedidoActivo.items.forEach(i => {
-                    const est = pedidoActivo.estados[i.tienda];
-                    htmlC += `
-                        <div class="item-linea" style="display:flex; justify-content:space-between; align-items:center;">
-                            <div><b>${i.tienda}</b>: ${i.item}</div>
-                            <div>
-                                ${est === 'Preparando' ? `<button onclick="marcarListo('${i.tienda}')">Listo</button>` : `<span class="badge listo">✓ Listo</span>`}
-                            </div>
-                        </div>`;
-                });
-                htmlC += `</div>`;
-                hubC.innerHTML = htmlC;
-            } else {
-                hubC.innerHTML = `<div style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">Monitoreando la pasarela de pedidos activos...</div>`;
-            }
-
-            // Render Panel Rider
-            const hubR = document.getElementById('hubRider');
-            if(fase === 'LOGISTICA_RIDER') {
-                hubR.innerHTML = `
-                    <div class="alerta-pedido
+                <div class="productos-grid">
+                    <div class="producto-card" onclick="toggleCheck('chk_v1')">
+                        <input type="checkbox" id="chk_v1" data-precio="11.90" onchange="calcularTotal()">
+                        <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=120&auto=format&fit=crop&q=60" alt="Burger">
+                        <div class="producto-info">
+                            <h4>Burguer Del Val Vegana</h4>
+                            <p>Medallón artes
