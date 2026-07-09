@@ -27,7 +27,7 @@ app.post('/api/pedido', (req, res) => {
         cliente,
         direccion,
         productos: productos.map(p => ({ ...p, estado: 'Pendiente' })), // Cada producto empieza pendiente
-        estado General: 'Preparando en el Mercado',
+        estadoGeneral: 'Preparando en el Mercado', // <-- CORREGIDO: Sin espacios
         fecha: new Date()
     };
 
@@ -74,7 +74,7 @@ wss.on('connection', (ws, req) => {
         console.log(`🛵 Repartidor conectado en Valladolid listo para reparto.`);
     }
 
-    // LÓGICA DE MENSAJES CORREGIDA (Para procesar las acciones)
+    // LÓGICA DE MENSAJES
     ws.on('message', (message) => {
         try {
             const data = JSON.parse(message);
@@ -87,7 +87,7 @@ wss.on('connection', (ws, req) => {
                     let prod = pedido.productos.find(p => p.comercio === rol);
                     if (prod) prod.estado = 'Listo';
 
-                    // Comprobar si TODOS los productos del pedido en el mercado están listos
+                    // Comprobar si TODOS los productos del pedido están listos
                     let todoListo = pedido.productos.every(p => p.estado === 'Listo');
                     
                     if (todoListo) {
@@ -122,6 +122,6 @@ wss.on('connection', (ws, req) => {
 
 const PORT = 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Friss Engine corriendo de forma segura en http://localhost:${PORT}`);
+    console.log(`🚀 Friss Engine corriendo sin fallos en http://localhost:${PORT}`);
     console.log(`📍 Hub Centralizado: Mercado del Val, Valladolid.`);
 });
