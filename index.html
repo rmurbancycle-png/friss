@@ -104,11 +104,10 @@
 }
 
     </style>
+   <link rel="stylesheet" href="css/estilos.css"> 
 </head>
 <body>
-<header class="header-friss">
-
-    <img src="Friss recortado.PNG" alt="FRISS" class="logo-principal">
+   <img src="Friss recortado.PNG" alt="FRISS" class="logo-principal">
 
 </header>
     <div class="dashboard">
@@ -364,35 +363,21 @@
 <div class="comercio-seccion">
 
     <div style="display:flex;align-items:center;gap:10px;">
-        <img src="logo vegg´s.jpg" class="comercio-logo" alt="Vegg's">
+        <img src="logo veggs.jpg" class="comercio-logo" alt="Vegg's">
+
         <strong>Vegg's</strong>
-        <span style="color:#666;">Alimentación ecológica y natural</span>
-    </div>
 
-    <div class="productos-grid">
-
-        <div class="producto-item" onclick="toggleItem('chk_v1')">
-
-            <input
-                type="checkbox"
-                id="chk_v1"
-                data-precio="11.90"
-                data-nombre="Burguer Del Val Vegana"
-                data-tienda="Vegg's"
-                onchange="calcularTotal()">
-
-            <div class="producto-info">
-                <h4>Burguer Del Val Vegana</h4>
-                <p>Medallón artesanal con salsa de la casa</p>
-            </div>
-
-            <div class="precio">11,90 €</div>
-
-        </div>
+        <span style="color:#666;">
+            Alimentación ecológica y natural
+        </span>
 
     </div>
+
+    <div id="catalogoVeggs"></div>
 
 </div>
+
+dibujarCatalogoVeggs();
 
             <div class="input-group">
                 <label>DIRECCIÓN DE ENTREGA EN VALLADOLID</label>
@@ -424,7 +409,78 @@
         </div>
 
     </div>
+/* ============================
+   CATÁLOGO FRISS
+============================ */
 
+const catalogo = {
+
+    mesetarios: {
+
+        categorias: []
+
+    },
+
+    veggs: {
+
+        categorias: [
+
+            {
+                nombre: "Aceites y Condimentos Bio",
+
+                productos: [
+
+                    {
+                        nombre: "Vinagre de Manzana sin filtrar",
+                        descripcion: "Botella cristal 750 ml · Voelkel",
+                        precio: 4.69
+                    },
+
+                    {
+                        nombre: "Vinagre de Granada sin filtrar",
+                        descripcion: "Botella cristal 500 ml · Ecovinal",
+                        precio: 4.20
+                    },
+
+                    {
+                        nombre: "Mantequilla Ghee Easy",
+                        descripcion: "Tarro 245 gr",
+                        precio: 12.65
+                    },
+
+                    {
+                        nombre: "Salsa de soja Tamari",
+                        descripcion: "Botella 500 ml Biocop",
+                        precio: 10.29
+                    },
+
+                    {
+                        nombre: "Hatcho Miso",
+                        descripcion: "Tarro 300 gr",
+                        precio: 9.15
+                    },
+
+                    {
+                        nombre: "Sal Rosa Himalaya",
+                        descripcion: "Bolsa 1 Kg",
+                        precio: 2.86
+                    },
+
+                    {
+                        nombre: "Aceite de Coco Virgen",
+                        descripcion: "Tarro 550 gr",
+                        precio: 8.90
+                    }
+
+                ]
+
+            }
+
+        ]
+
+    }
+
+};
     <script>
         let pedidoActivo = null;
 
@@ -501,7 +557,8 @@
                 for(let tienda in pedidoActivo.estados) {
                     const est = pedidoActivo.estados[tienda];
                     const itemsTienda = pedidoActivo.items.filter(i => i.tienda === tienda).map(i => i.item).join(', ');
-                    
+      
+}              
                     htmlC += `
                         <div class="item-linea" style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0;">
                             <div>
@@ -533,6 +590,78 @@
                 hubR.innerHTML = `<div style="text-align:center; color:#7f8c8d;">⏳ Esperando que los puestos del mercado completen la cesta unificada...</div>`;
             }
         }
+        function dibujarCatalogoVeggs(){
+
+    let html = "";
+
+    catalogo.veggs.categorias.forEach((categoria, indice)=>{
+
+        html += `
+        <div class="categoria-desplegable">
+
+            <div class="categoria-cabecera"
+                 onclick="toggleCategoria('veg${indice}')">
+
+                ${categoria.nombre}
+
+            </div>
+
+            <div class="categoria-contenido"
+                 id="veg${indice}">
+
+                <div class="productos-grid">
+        `;
+
+        categoria.productos.forEach((producto, i)=>{
+
+            html += `
+
+            <div class="producto-item">
+
+                <input
+                    type="checkbox"
+                    id="veg_${indice}_${i}"
+                    data-precio="${producto.precio}"
+                    data-nombre="${producto.nombre}"
+                    data-tienda="Vegg's"
+                    onchange="calcularTotal()">
+
+                <div class="producto-info">
+
+                    <h4>${producto.nombre}</h4>
+
+                    <p>${producto.descripcion}</p>
+
+                </div>
+
+                <div class="precio">
+
+                    ${producto.precio.toFixed(2)} €
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+        html += `
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("catalogoVeggs").innerHTML = html;
+
     </script>
+    <script src="js/catalogo.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/pedidos.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
