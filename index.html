@@ -73,9 +73,38 @@
     </style>
 </head>
 <body>
+.header-friss{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    text-align:center;
+}
 
-    <h1>🛍️ FRISS Marketplace</h1>
-    <div class="sub">Plataforma Logística Multitienda • Valladolid</div>
+.logo-principal{
+    width:260px;
+    max-width:90%;
+    margin-bottom:20px;
+}
+
+.logos-comercios{
+    display:flex;
+    justify-content:center;
+    gap:45px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo-comercio{
+    height:70px;
+    object-fit:contain;
+    transition:.3s;
+}
+
+.logo-comercio:hover{
+    transform:scale(1.08);
+}
 
     <div class="dashboard">
 
@@ -88,10 +117,11 @@
                 
                 <!-- PUESTO: MESETARIOS (CON LOGO OFICIAL) -->
                 <div style="margin-left: 10px; margin-top: 10px;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <img src="mesetarios-logo.png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.style.display='none'">
-                        <p style="font-weight: bold; margin: 0; font-size: 14px; color: var(--dark);">Mesetarios (Gourmet & Selección)</p>
-                    </div>
+                   <div style="display:flex;align-items:center;gap:10px;">
+    <img src="mesetarios-logo.png" class="comercio-logo">
+    <strong>Mesetarios</strong>
+    <span style="color:#666;">Gourmet & Selección</span>
+</div>
                     
                     <!-- CATEGORÍA 1 -->
                     <div class="categoria-desplegable" id="cat1">
@@ -325,8 +355,12 @@
             </div>
 
             <!-- OTRO COMERCIO -->
-            <div class="comercio-seccion" style="margin-top: 15px;">
-                <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
+            <div class="comercio-seccion"
+                <div style="display:flex;align-items:center;gap:10px;">
+    <img src="veggs-logo.png" class="comercio-logo">
+    <strong>Vegg's</strong>
+    <span style="color:#666;">Alimentación ecológica y natural</span>
+</div>
                 <div class="productos-grid">
                     <div class="producto-item" onclick="toggleItem('chk_v1')">
                         <input type="checkbox" id="chk_v1" data-precio="11.90" data-nombre="Burguer Del Val Vegana" data-tienda="Vegg's" onchange="calcularTotal()">
