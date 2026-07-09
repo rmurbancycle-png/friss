@@ -79,7 +79,7 @@ wss.on('connection', (ws, req) => {
 
     if (comerciosActivos[rol]) {
         comerciosActivos[rol].ws = ws;
-        console.log(`🏪 Comercio conectado al Valshopper Hub: ${comerciosActivos[rol].nombre}`);
+        console.log(`🏪 Comercio conectado al Friss Hub: ${comerciosActivos[rol].nombre}`);
     } else if (rol === 'rider') {
         ridersActivos.push(ws);
         console.log(`🛵 Repartidor conectado en Valladolid listo para reparto.`);
@@ -101,6 +101,6 @@ wss.on('connection', (ws, req) => {
 
 const PORT = 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Valshopper Engine corriendo en http://localhost:${PORT}`);
+    console.log(`🚀 Friss Engine corriendo en http://localhost:${PORT}`);
     console.log(`📍 Hub Centralizado: Mercado del Val, Valladolid.`);
 });
