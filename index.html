@@ -1,127 +1,41 @@
-npm install express ws
-node friss.js
-const express = require('express');
-const http = require('http');
-const WebSocket = require('ws');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Valshopper MVP - Mercado del Val</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; gap: 20px; padding: 20px; background: #f4f4f9; }
+        .pantalla { flex: 1; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 5px solid #e67e22; }
+        h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+        button { background: #e67e22; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+        .alerta { background: #fff3cd; padding: 10px; margin: 10px 0; border-radius: 4px; border-left: 5px solid #ffc107; }
+    </style>
+</head>
+<body>
 
-const app = express();
-app.use(express.json());
+    <!-- 1. PANTALLA CLIENTE -->
+    <div class="pantalla">
+        <h2>📱 App Cliente (Valshopper)</h2>
+        <p><b>Cesta Única (Mercado del Val):</b></p>
+        <label><input type="checkbox" id="item1"> Mesetarios - Tabla Ibérica</label><br><br>
+        <label><input type="checkbox" id="item2"> Vegg's - Hamburguesa Vegana</label><br><br>
+        <label><input type="checkbox" id="item3"> El Bombón - Pastel de Nata</label><br><br>
+        <input type="text" id="dir" value="Calle Santiago, Valladolid" style="width:90%; padding:5px;"><br><br>
+        <button onclick="alert('¡Pedido enviado al Mercado del Val! Comprueba la columna del centro.')">Pedir al Mercado</button>
+    </div>
 
-// Simulación de Base de Datos en memoria para el Mercado del Val
-let pedidos = [];
-let comerciosActivos = {
-    "mesetarios": { nombre: "Mesetarios (Embutidos)", ws: null },
-    "el-bombon": { nombre: "El Bombón (Pastelería)", ws: null },
-    "veggs": { nombre: "Vegg's (Plant-based)", ws: null }
-};
-let ridersActivos = [];
+    <!-- 2. PANTALLA COMERCIO -->
+    <div class="pantalla" style="border-top-color: #2ecc71;">
+        <h2>🏪 Panel Comercios (Del Val)</h2>
+        <div class="alerta">🚨 <b>Mesetarios:</b> Preparar Tabla Ibérica</div>
+        <div class="alerta">🚨 <b>Vegg's:</b> Preparar Hamburguesa</div>
+    </div>
 
-// --- SERVIDOR HTTP ---
+    <!-- 3. PANTALLA RIDER -->
+    <div class="pantalla" style="border-top-color: #3498db;">
+        <h2>🛵 App Rider (Repartidor)</h2>
+        <div class="alerta" style="background: #e3f2fd; border-left-color: #2196f3;">📦 <b>Viaje unificado listo:</b> Recoger en Mercado del Val y llevar a Calle Santiago.</div>
+    </div>
 
-// 1. Endpoint para crear un pedido combinado
-app.post('/api/pedido', (req, res) => {
-    const { cliente, direccion, productos } = req.body; 
-
-    const nuevoPedido = {
-        id: pedidos.length + 1,
-        cliente,
-        direccion,
-        productos: productos.map(p => ({ ...p, estado: 'Pendiente' })), // Cada producto empieza pendiente
-        estadoGeneral: 'Preparando en el Mercado', // <-- CORREGIDO: Sin espacios
-        fecha: new Date()
-    };
-
-    pedidos.push(nuevoPedido);
-
-    // Notificar a los comercios implicados
-    productos.forEach(p => {
-        const comercio = comerciosActivos[p.comercio];
-        if (comercio && comercio.ws && comercio.ws.readyState === WebSocket.OPEN) {
-            comercio.ws.send(JSON.stringify({
-                evento: 'NUEVO_PEDIDO_PRODUCTO',
-                pedidoId: nuevoPedido.id,
-                producto: p.item,
-                direccion: nuevoPedido.direccion
-            }));
-        }
-    });
-
-    res.status(201).json({ 
-        mensaje: "Pedido procesado y notificado al Mercado del Val", 
-        pedidoId: nuevoPedido.id 
-    });
-});
-
-// 2. Historial de pedidos
-app.get('/api/pedidos', (req, res) => {
-    res.json(pedidos);
-});
-
-
-// --- SERVIDOR WEBSOCKET (Tiempo Real) ---
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
-wss.on('connection', (ws, req) => {
-    const urlParams = new URLSearchParams(req.url.split('?')[1]);
-    const rol = urlParams.get('rol');
-
-    if (comerciosActivos[rol]) {
-        comerciosActivos[rol].ws = ws;
-        console.log(`🏪 Comercio conectado al Friss Hub: ${comerciosActivos[rol].nombre}`);
-    } else if (rol === 'rider') {
-        ridersActivos.push(ws);
-        console.log(`🛵 Repartidor conectado en Valladolid listo para reparto.`);
-    }
-
-    // LÓGICA DE MENSAJES
-    ws.on('message', (message) => {
-        try {
-            const data = JSON.parse(message);
-            console.log(`[Evento recibido de ${rol}]:`, data);
-
-            // Acción: El comercio avisa que terminó su producto
-            if (data.evento === 'PRODUCTO_LISTO') {
-                let pedido = pedidos.find(p => p.id === data.pedidoId);
-                if (pedido) {
-                    let prod = pedido.productos.find(p => p.comercio === rol);
-                    if (prod) prod.estado = 'Listo';
-
-                    // Comprobar si TODOS los productos del pedido están listos
-                    let todoListo = pedido.productos.every(p => p.estado === 'Listo');
-                    
-                    if (todoListo) {
-                        pedido.estadoGeneral = 'Listo para recogida';
-                        // Avisar inmediatamente a los riders de Valladolid
-                        ridersActivos.forEach(rider => {
-                            if (rider.readyState === WebSocket.OPEN) {
-                                rider.send(JSON.stringify({
-                                    evento: 'NUEVO_VIAJE_DISPONIBLE',
-                                    pedidoId: pedido.id,
-                                    recogida: 'Mercado del Val (Hub)',
-                                    destino: pedido.direccion
-                                }));
-                            }
-                        });
-                    }
-                }
-            }
-        } catch (err) {
-            console.error("Error al procesar mensaje JSON:", err);
-        }
-    });
-
-    ws.on('close', () => {
-        if (comerciosActivos[rol] && comerciosActivos[rol].ws === ws) {
-            comerciosActivos[rol].ws = null;
-        }
-        ridersActivos = ridersActivos.filter(r => r !== ws);
-        console.log(`❌ Conexión cerrada para el rol: ${rol}`);
-    });
-});
-
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`🚀 Friss Engine corriendo sin fallos en http://localhost:${PORT}`);
-    console.log(`📍 Hub Centralizado: Mercado del Val, Valladolid.`);
-});
+</body>
+</html>
