@@ -153,10 +153,9 @@
 </head>
 <body>
 
-    <!-- PORTADA UNIFICADA FRISS -->
     <div class="hero-section">
         <div class="hero-text-card">
-            <img src="Friss recortado.jpg" alt="Logo FRISS" class="hero-logo" onerror="this.src='https://placehold.co/80x80?text=FRISS'">
+            <img src="friss-logo.jpg" alt="Logo FRISS" class="hero-logo" onerror="this.src='https://placehold.co/80x80?text=FRISS'">
             <h1>FRISS Marketplace</h1>
             <p class="hero-description">
                 La revolución de la compra local en Valladolid. Consolida pedidos de múltiples puestos tradicionales del <strong>Mercado del Val</strong> en una única cesta y recíbelo todo en tu casa con un solo repartidor.
@@ -165,33 +164,27 @@
                 <span class="hero-badge">📍 Valladolid</span>
                 <span class="hero-badge">📦 Pedido Combinado</span>
                 <span class="hero-badge">🏪 Mercado del Val</span>
-                <span class="hero-badge">🏪 Mesetarios</span>
-                <span class="hero-badge">🏪 Vegg´s</span>
             </div>
         </div>
         <div class="hero-image-card">
-            <img src="catalogo portada.jpg" alt="Catálogo de Alimentos Valladolid" class="hero-image" onerror="this.src='https://placehold.co/400x250?text=Cat%C3%A1logo+Valladolid'">
+            <img src="catalogo-portada.jpg" alt="Catálogo de Alimentos Valladolid" class="hero-image" onerror="this.src='https://placehold.co/400x250?text=Cat%C3%A1logo+Valladolid'">
         </div>
     </div>
 
-    <!-- CUADRO DE MANDOS DEL SIMULADOR -->
     <div class="dashboard">
 
-        <!-- 1. APP CLIENTE -->
         <div class="pantalla">
             <h2>📱 App Cliente</h2>
             
             <div class="comercio-seccion">
                 <div class="comercio-titulo">🏛️ Mercado del Val (Mercado de Abastos)</div>
                 
-                <!-- PUESTO: MESETARIOS -->
                 <div style="margin-left: 10px; margin-top: 10px;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                         <img src="mesetarios-logo.png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.src='https://placehold.co/28x28?text=%F0%9F%A5%A9'">
                         <p style="font-weight: bold; margin: 0; font-size: 14px; color: var(--dark);">Mesetarios (Gourmet & Selección)</p>
                     </div>
                     
-                    <!-- CATEGORÍA 1 -->
                     <div class="categoria-desplegable" id="cat1">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat1')">🍷 Vinos y licores</div>
                         <div class="categoria-contenido">
@@ -240,7 +233,6 @@
                         </div>
                     </div>
 
-                    <!-- CATEGORÍA 2 -->
                     <div class="categoria-desplegable" id="cat2">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat2')">🫒 Aceite de oliva</div>
                         <div class="categoria-contenido">
@@ -269,7 +261,6 @@
                         </div>
                     </div>
 
-                    <!-- CATEGORÍA 3 -->
                     <div class="categoria-desplegable" id="cat3">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat3')">🧀 Quesos</div>
                         <div class="categoria-contenido">
@@ -298,7 +289,6 @@
                         </div>
                     </div>
 
-                    <!-- CATEGORÍA 4 -->
                     <div class="categoria-desplegable" id="cat4">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat4')">🥫 Patés y conservas</div>
                         <div class="categoria-contenido">
@@ -317,7 +307,6 @@
                         </div>
                     </div>
 
-                    <!-- CATEGORÍA 5 -->
                     <div class="categoria-desplegable" id="cat5">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat5')">🥓 Embutidos</div>
                         <div class="categoria-contenido">
@@ -339,7 +328,6 @@
                 </div>
             </div>
 
-            <!-- OTRO COMERCIO -->
             <div class="comercio-seccion" style="margin-top: 15px;">
                 <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
                 <div class="productos-grid">
@@ -364,7 +352,6 @@
             <button onclick="lanzarPedido()">Enviar Pedido Combinado</button>
         </div>
 
-        <!-- 2. HUB DE COMERCIOS -->
         <div class="pantalla comercio">
             <h2>🏪 Hub FRISS Comercios</h2>
             <div id="hubComercios" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
@@ -372,7 +359,6 @@
             </div>
         </div>
 
-        <!-- 3. RIDER APP -->
         <div class="pantalla rider">
             <h2>🛵 FRISS Rider App</h2>
             <div id="hubRider" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
@@ -391,7 +377,6 @@
         }
 
         function toggleItem(id, event) {
-            // Previene doble click cruzado si pinchan directo en la caja de input
             if (event.target.tagName === 'INPUT') {
                 return; 
             }
