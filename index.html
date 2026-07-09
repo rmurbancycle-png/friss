@@ -6,20 +6,101 @@
     <title>FRISS MVP - VENTA ONLINE</title>
     <style>
         :root {
-            --primary: #e67e22;
+            --primary: #2d6a4f; /* Verde corporativo FRISS */
+            --accent: #e67e22;  /* Naranja secundario para destaques/alertas */
             --success: #2ecc71;
             --info: #3498db;
-            --dark: #2c3e50;
-            --light: #f5f7fb;
+            --dark: #1b4332;
+            --light: #f4f9f4;
+            --white: #ffffff;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: var(--light); color: var(--dark); }
-        h1 { text-align: center; margin-bottom: 5px; color: var(--dark); font-size: 26px; }
-        .sub { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-size: 14px; }
         
+        /* Contenedor del Dashboard */
         .dashboard { display: flex; flex-direction: column; gap: 25px; max-width: 1400px; margin: 0 auto; }
         @media(min-width: 992px) { .dashboard { flex-direction: row; } }
         
-        .pantalla { flex: 1; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-top: 6px solid var(--primary); display: flex; flex-direction: column; }
+        /* Portada / Hero Section con las dos imágenes */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto 25px auto;
+            width: 100%;
+        }
+        @media(min-width: 768px) {
+            .hero-section {
+                flex-direction: row;
+                align-items: stretch;
+            }
+        }
+        .hero-text-card {
+            flex: 1.2;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 6px solid var(--primary);
+        }
+        .hero-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .hero-text-card h1 {
+            text-align: left;
+            margin: 0 0 8px 0;
+            font-size: 32px;
+            color: var(--dark);
+        }
+        .hero-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #475569;
+            margin: 0 0 20px 0;
+        }
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .hero-badge {
+            background: var(--light);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(45, 106, 79, 0.2);
+        }
+        .hero-image-card {
+            flex: 1;
+            background: var(--white);
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            max-height: 280px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* Pantallas del Simulador */
+        .pantalla { flex: 1; background: var(--white); padding: 20px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-top: 6px solid var(--primary); display: flex; flex-direction: column; }
         .pantalla.comercio { border-top-color: var(--success); }
         .pantalla.rider { border-top-color: var(--info); }
         
@@ -29,7 +110,7 @@
         .comercio-titulo { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #34495e; border-left: 4px solid var(--primary); padding-left: 8px; display: flex; align-items: center; gap: 8px; }
         
         /* Mini logo del comercio */
-        .comercio-logo { width: 24px; height: 24px; border-radius: 4px; object-fit: cover; }
+        .comercio-logo { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
         /* Estilos de los Desplegables (Acordeón) */
         .categoria-desplegable { margin-bottom: 8px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
@@ -37,18 +118,18 @@
         .categoria-cabecera:hover { background: #f1f5f9; }
         .categoria-cabecera::after { content: '▼'; font-size: 10px; color: #94a3b8; transition: transform 0.2s; }
         .categoria-desplegable.abierto .categoria-cabecera::after { transform: rotate(180deg); }
-        .categoria-contenido { display: none; padding: 10px; background: #fff; border-top: 1px solid #edf2f7; }
+        .categoria-contenido { display: none; padding: 10px; background: var(--white); border-top: 1px solid #edf2f7; }
         .categoria-desplegable.abierto .categoria-contenido { display: block; }
 
         /* Lista de Productos Simplificada (Sin fotos) */
         .productos-grid { display: flex; flex-direction: column; gap: 8px; }
         .producto-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
-        .producto-item:hover { background: #fffaf5; }
+        .producto-item:hover { background: #fcf8f2; }
         .producto-item input { cursor: pointer; }
         .producto-info { flex: 1; }
         .producto-info h4 { margin: 0 0 2px 0; font-size: 13px; color: var(--dark); }
         .producto-info p { margin: 0; font-size: 11px; color: #7f8c8d; }
-        .precio { font-weight: bold; color: var(--primary); font-size: 13px; white-space: nowrap; }
+        .precio { font-weight: bold; color: var(--accent); font-size: 13px; white-space: nowrap; }
         
         /* Formulario e Inputs */
         .input-group { margin-top: 15px; }
@@ -56,7 +137,7 @@
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
         
         /* Botones */
-        button { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 15px; transition: background 0.2s; margin-top: 15px; }
+        button { background: var(--primary); color: var(--white); border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 15px; transition: background 0.2s; margin-top: 15px; }
         button:hover { filter: brightness(0.9); }
         .pantalla.comercio button { background: var(--success); padding: 6px 12px; font-size: 12px; width: auto; margin-top: 5px; }
         .pantalla.rider button { background: var(--info); }
@@ -74,9 +155,28 @@
 </head>
 <body>
 
-    <h1>🛍️ FRISS Marketplace</h1>
-    <div class="sub">Plataforma Logística Multitienda • Valladolid</div>
+    <!-- PORTADA UNIFICADA FRISS -->
+    <div class="hero-section">
+        <div class="hero-text-card">
+            <!-- Cargamos tu logotipo circular oficial -->
+            <img src="Friss recortado.jpg" alt="Logo FRISS" class="hero-logo" onerror="this.src='https://placehold.co/80x80?text=FRISS'">
+            <h1>FRISS Marketplace</h1>
+            <p class="hero-description">
+                La revolución de la compra local en Valladolid. Consolida pedidos de múltiples puestos tradicionales del <strong>Mercado del Val</strong> en una única cesta y recíbelo todo en tu casa con un solo repartidor.
+            </p>
+            <div class="hero-badges">
+                <span class="hero-badge">📍 Valladolid</span>
+                <span class="hero-badge">📦 Pedido Combinado</span>
+                <span class="hero-badge">🏪 Mercado del Val</span>
+            </div>
+        </div>
+        <div class="hero-image-card">
+            <!-- Cargamos el cartel del catálogo de alimentación de Valladolid -->
+            <img src="catalogo portada.jpg" alt="Catálogo de Alimentos Valladolid" class="hero-image" onerror="this.src='https://placehold.co/400x250?text=Cat%C3%A1logo+Valladolid'">
+        </div>
+    </div>
 
+    <!-- CUADRO DE MANDOS DEL SIMULADOR -->
     <div class="dashboard">
 
         <!-- 1. APP CLIENTE -->
@@ -86,10 +186,10 @@
             <div class="comercio-seccion">
                 <div class="comercio-titulo">🏛️ Mercado del Val (Mercado de Abastos)</div>
                 
-                <!-- PUESTO: MESETARIOS (CON LOGO OFICIAL) -->
+                <!-- PUESTO: MESETARIOS (CON LOGO OFICIAL DEL VESTÍBULO) -->
                 <div style="margin-left: 10px; margin-top: 10px;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <img src="mesetarios-logo.png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.style.display='none'">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                        <img src="Captura de pantalla 2023-01-18 a la(s) 20.27.29 (1).png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.src='https://placehold.co/28x28?text=%F0%9F%A5%A9'">
                         <p style="font-weight: bold; margin: 0; font-size: 14px; color: var(--dark);">Mesetarios (Gourmet & Selección)</p>
                     </div>
                     
@@ -478,3 +578,11 @@
     </script>
 </body>
 </html>
+```eof
+
+### Detalles de la actualización:
+* **Estructura visual consolidada:** La cabecera unifica el logotipo de la piña/naranja de **FRISS** con el catálogo estilizado de alimentos, lo que hace que se vea como un marketplace comercial real.
+* **Integración del logo de Mesetarios:** Se ha cambiado la ruta del logo de Mesetarios para que apunte directamente al archivo `Captura de pantalla 2023-01-18 a la(s) 20.27.29 (1).png`. Ahora, cuando subas ese archivo de imagen a tu repositorio de GitHub, la web lo cargará y mostrará directamente allí con bordes suavizados de manera excelente.
+* **Mantenimiento del motor logístico:** El cálculo del total con tus productos del Excel y la interacción con los paneles de negocios y riders siguen activos al 100%.
+
+¡Ya lo tienes todo configurado! Haz el commit de los cambios en GitHub y abre la página en tu navegador para ver lo espectacular que luce ahora el diseño.
