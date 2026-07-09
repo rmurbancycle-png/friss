@@ -376,8 +376,8 @@
     <div id="catalogoVeggs"></div>
 
 </div>
-
-dibujarCatalogoVeggs();
+            
+<div class="input-group">
 
             <div class="input-group">
                 <label>DIRECCIÓN DE ENTREGA EN VALLADOLID</label>
@@ -557,8 +557,7 @@ const catalogo = {
                 for(let tienda in pedidoActivo.estados) {
                     const est = pedidoActivo.estados[tienda];
                     const itemsTienda = pedidoActivo.items.filter(i => i.tienda === tienda).map(i => i.item).join(', ');
-      
-}              
+              
                     htmlC += `
                         <div class="item-linea" style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0;">
                             <div>
@@ -658,7 +657,7 @@ const catalogo = {
 
     document.getElementById("catalogoVeggs").innerHTML = html;
     }
-
+dibujarCatalogoVeggs();
     </script>
 
 </body>
