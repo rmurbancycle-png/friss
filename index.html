@@ -6,101 +6,20 @@
     <title>FRISS MVP - VENTA ONLINE</title>
     <style>
         :root {
-            --primary: #2d6a4f; /* Verde corporativo FRISS */
-            --accent: #e67e22;  /* Naranja secundario para destaques/alertas */
+            --primary: #e67e22;
             --success: #2ecc71;
             --info: #3498db;
-            --dark: #1b4332;
-            --light: #f4f9f4;
-            --white: #ffffff;
+            --dark: #2c3e50;
+            --light: #f5f7fb;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: var(--light); color: var(--dark); }
+        h1 { text-align: center; margin-bottom: 5px; color: var(--dark); font-size: 26px; }
+        .sub { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-size: 14px; }
         
-        /* Contenedor del Dashboard */
         .dashboard { display: flex; flex-direction: column; gap: 25px; max-width: 1400px; margin: 0 auto; }
         @media(min-width: 992px) { .dashboard { flex-direction: row; } }
         
-        /* Portada / Hero Section con las dos imágenes */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto 25px auto;
-            width: 100%;
-        }
-        @media(min-width: 768px) {
-            .hero-section {
-                flex-direction: row;
-                align-items: stretch;
-            }
-        }
-        .hero-text-card {
-            flex: 1.2;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 14px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-left: 6px solid var(--primary);
-        }
-        .hero-logo {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .hero-text-card h1 {
-            text-align: left;
-            margin: 0 0 8px 0;
-            font-size: 32px;
-            color: var(--dark);
-        }
-        .hero-description {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #475569;
-            margin: 0 0 20px 0;
-        }
-        .hero-badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .hero-badge {
-            background: var(--light);
-            color: var(--primary);
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: bold;
-            border: 1px solid rgba(45, 106, 79, 0.2);
-        }
-        .hero-image-card {
-            flex: 1;
-            background: var(--white);
-            border-radius: 14px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            max-height: 280px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        /* Pantallas del Simulador */
-        .pantalla { flex: 1; background: var(--white); padding: 20px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-top: 6px solid var(--primary); display: flex; flex-direction: column; }
+        .pantalla { flex: 1; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-top: 6px solid var(--primary); display: flex; flex-direction: column; }
         .pantalla.comercio { border-top-color: var(--success); }
         .pantalla.rider { border-top-color: var(--info); }
         
@@ -110,7 +29,7 @@
         .comercio-titulo { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #34495e; border-left: 4px solid var(--primary); padding-left: 8px; display: flex; align-items: center; gap: 8px; }
         
         /* Mini logo del comercio */
-        .comercio-logo { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .comercio-logo { width: 24px; height: 24px; border-radius: 4px; object-fit: cover; }
         
         /* Estilos de los Desplegables (Acordeón) */
         .categoria-desplegable { margin-bottom: 8px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
@@ -118,18 +37,18 @@
         .categoria-cabecera:hover { background: #f1f5f9; }
         .categoria-cabecera::after { content: '▼'; font-size: 10px; color: #94a3b8; transition: transform 0.2s; }
         .categoria-desplegable.abierto .categoria-cabecera::after { transform: rotate(180deg); }
-        .categoria-contenido { display: none; padding: 10px; background: var(--white); border-top: 1px solid #edf2f7; }
+        .categoria-contenido { display: none; padding: 10px; background: #fff; border-top: 1px solid #edf2f7; }
         .categoria-desplegable.abierto .categoria-contenido { display: block; }
 
         /* Lista de Productos Simplificada (Sin fotos) */
         .productos-grid { display: flex; flex-direction: column; gap: 8px; }
-        .producto-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.2s; user-select: none; }
-        .producto-item:hover { background: #fcf8f2; }
+        .producto-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+        .producto-item:hover { background: #fffaf5; }
         .producto-item input { cursor: pointer; }
         .producto-info { flex: 1; }
         .producto-info h4 { margin: 0 0 2px 0; font-size: 13px; color: var(--dark); }
         .producto-info p { margin: 0; font-size: 11px; color: #7f8c8d; }
-        .precio { font-weight: bold; color: var(--accent); font-size: 13px; white-space: nowrap; }
+        .precio { font-weight: bold; color: var(--primary); font-size: 13px; white-space: nowrap; }
         
         /* Formulario e Inputs */
         .input-group { margin-top: 15px; }
@@ -137,8 +56,10 @@
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
         
         /* Botones */
-        button { background: var(--primary); color: var(--white); border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 15px; transition: background 0.2s; margin-top: 15px; }
+        button { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 15px; transition: background 0.2s; margin-top: 15px; }
         button:hover { filter: brightness(0.9); }
+        .pantalla.comercio button { background: var(--success); padding: 6px 12px; font-size: 12px; width: auto; margin-top: 5px; }
+        .pantalla.rider button { background: var(--info); }
         
         /* Alertas y Estados */
         .alerta-pedido { background: #fff5e6; border-left: 4px solid #ff9f43; padding: 15px; margin-bottom: 15px; border-radius: 8px; }
@@ -153,26 +74,9 @@
 </head>
 <body>
 
-    <!-- PORTADA UNIFICADA FRISS -->
-    <div class="hero-section">
-        <div class="hero-text-card">
-            <img src="Friss recortado.jpg" alt="Logo FRISS" class="hero-logo" onerror="this.src='https://placehold.co/80x80?text=FRISS'">
-            <h1>FRISS Marketplace</h1>
-            <p class="hero-description">
-                La revolución de la compra local en Valladolid. Consolida pedidos de múltiples puestos tradicionales del <strong>Mercado del Val</strong> en una única cesta y recíbelo todo en tu casa con un solo repartidor.
-            </p>
-            <div class="hero-badges">
-                <span class="hero-badge">📍 Valladolid</span>
-                <span class="hero-badge">📦 Pedido Combinado</span>
-                <span class="hero-badge">🏪 Mercado del Val</span>
-            </div>
-        </div>
-        <div class="hero-image-card">
-            <img src="catalogo portada.jpg" alt="Catálogo de Alimentos Valladolid" class="hero-image" onerror="this.src='https://placehold.co/400x250?text=Cat%C3%A1logo+Valladolid'">
-        </div>
-    </div>
+    <h1>🛍️ FRISS Marketplace</h1>
+    <div class="sub">Plataforma Logística Multitienda • Valladolid</div>
 
-    <!-- CUADRO DE MANDOS DEL SIMULADOR -->
     <div class="dashboard">
 
         <!-- 1. APP CLIENTE -->
@@ -182,10 +86,10 @@
             <div class="comercio-seccion">
                 <div class="comercio-titulo">🏛️ Mercado del Val (Mercado de Abastos)</div>
                 
-                <!-- PUESTO: MESETARIOS -->
+                <!-- PUESTO: MESETARIOS (CON LOGO OFICIAL) -->
                 <div style="margin-left: 10px; margin-top: 10px;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                        <img src="mesetarios-logo.png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.src='https://placehold.co/28x28?text=%F0%9F%A5%A9'">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <img src="mesetarios-logo.png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.style.display='none'">
                         <p style="font-weight: bold; margin: 0; font-size: 14px; color: var(--dark);">Mesetarios (Gourmet & Selección)</p>
                     </div>
                     
@@ -194,42 +98,42 @@
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat1')">🍷 Vinos y licores</div>
                         <div class="categoria-contenido">
                             <div class="productos-grid">
-                                <div class="producto-item" onclick="toggleItem('chk_m1', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m1')">
                                     <input type="checkbox" id="chk_m1" data-precio="10.30" data-nombre="Vino Cucú Cantaba la Rana" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Vino Cucú Cantaba la Rana</h4><p>D.O. Verdejo</p></div>
                                     <div class="precio">10,30 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m2', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m2')">
                                     <input type="checkbox" id="chk_m2" data-precio="17.20" data-nombre="Vino Louro Godello" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Vino Louro Godello</h4><p>D.O. Valdeorras</p></div>
                                     <div class="precio">17,20 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m3', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m3')">
                                     <input type="checkbox" id="chk_m3" data-precio="14.60" data-nombre="Convento Las Claras Merlot" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Convento Las Claras Merlot 8M</h4><p>D.O. Ribera del Duero</p></div>
                                     <div class="precio">14,60 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m4', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m4')">
                                     <input type="checkbox" id="chk_m4" data-precio="27.50" data-nombre="Emilio Moro VS" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Emilio Moro VS</h4><p>D.O. Ribera del Duero</p></div>
                                     <div class="precio">27,50 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m5', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m5')">
                                     <input type="checkbox" id="chk_m5" data-precio="8.50" data-nombre="Traslanzas Rosado" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Traslanzas Rosado</h4><p>D.O. Cigales</p></div>
                                     <div class="precio">8,50 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m6', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m6')">
                                     <input type="checkbox" id="chk_m6" data-precio="3.40" data-nombre="Sidra Artesanal Exner" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Sidra Artesanal Exner</h4><p>Llagar Castañón</p></div>
                                     <div class="precio">3,40 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m7', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m7')">
                                     <input type="checkbox" id="chk_m7" data-precio="10.40" data-nombre="Vermut Rojo Dos Deux" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Vermut Rojo</h4><p>Dos Deux</p></div>
                                     <div class="precio">10,40 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m8', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m8')">
                                     <input type="checkbox" id="chk_m8" data-precio="11.10" data-nombre="Vermut Siderit" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Vermut Siderit</h4><p>Destilería Siderit</p></div>
                                     <div class="precio">11,10 €</div>
@@ -243,24 +147,24 @@
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat2')">🫒 Aceite de oliva</div>
                         <div class="categoria-contenido">
                             <div class="productos-grid">
-                                <div class="producto-item" onclick="toggleItem('chk_m9', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m9')">
                                     <input type="checkbox" id="chk_m9" data-precio="13.70" data-nombre="AOVE Valdecuevas" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>AOVE Valdecuevas</h4><p>Arbequina • 500 ML</p></div>
+                                    <div class="producto-info"><h4>AOVE Valdecuevas</h4><p>Arbequina • 500 ML (Unidad)</p></div>
                                     <div class="precio">13,70 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m10', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m10')">
                                     <input type="checkbox" id="chk_m10" data-precio="16.90" data-nombre="AOVE La Sombra del Grillo" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>AOVE La Sombra del Grillo</h4><p>Hojiblanca • 500 ML</p></div>
+                                    <div class="producto-info"><h4>AOVE La Sombra del Grillo</h4><p>Hojiblanca • 500 ML (Unidad)</p></div>
                                     <div class="precio">16,90 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m11', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m11')">
                                     <input type="checkbox" id="chk_m11" data-precio="15.70" data-nombre="AOVE 555 Terraverne" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>AOVE 555 Terraverne</h4><p>Picual • 500 ML</p></div>
+                                    <div class="producto-info"><h4>AOVE 555 Terraverne</h4><p>Picual • 500 ML (Unidad)</p></div>
                                     <div class="precio">15,70 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m12', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m12')">
                                     <input type="checkbox" id="chk_m12" data-precio="19.30" data-nombre="AOVE Castillo de Canena" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>AOVE Castillo de Canena</h4><p>Arbequina • 500 ML</p></div>
+                                    <div class="producto-info"><h4>AOVE Castillo de Canena</h4><p>Arbequina • 500 ML (Unidad)</p></div>
                                     <div class="precio">19,30 €</div>
                                 </div>
                             </div>
@@ -272,25 +176,35 @@
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat3')">🧀 Quesos</div>
                         <div class="categoria-contenido">
                             <div class="productos-grid">
-                                <div class="producto-item" onclick="toggleItem('chk_m13', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m13')">
                                     <input type="checkbox" id="chk_m13" data-precio="28.00" data-nombre="Queso Cabra Semicurado" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Queso Cabra Semicurado</h4><p>Los Cameros (Precio/KG)</p></div>
                                     <div class="precio">28,00 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m14', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m14')">
                                     <input type="checkbox" id="chk_m14" data-precio="29.00" data-nombre="Queso Puigpedrós" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Queso Puigpedrós</h4><p>Molí de Ger (Precio/KG)</p></div>
                                     <div class="precio">29,00 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m15', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m15')">
                                     <input type="checkbox" id="chk_m15" data-precio="31.00" data-nombre="Queso Azul de Oveja" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Queso Azul de Oveja</h4><p>Las Cortas de Blas (Precio/KG)</p></div>
                                     <div class="precio">31,00 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m16', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m16')">
                                     <input type="checkbox" id="chk_m16" data-precio="29.00" data-nombre="Queso Rueda Reserva" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Queso Rueda Reserva</h4><p>La Quesería de Rueda (Precio/KG)</p></div>
                                     <div class="precio">29,00 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m17')">
+                                    <input type="checkbox" id="chk_m17" data-precio="34.00" data-nombre="Queso Junco Cantagrullas" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Queso Junco</h4><p>Granja Cantagrullas (Precio/KG)</p></div>
+                                    <div class="precio">34,00 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m18')">
+                                    <input type="checkbox" id="chk_m18" data-precio="37.50" data-nombre="Queso Rebuzno Cantagrullas" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Queso Rebuzno Mesetario</h4><p>Granja Cantagrullas (Precio/KG)</p></div>
+                                    <div class="precio">37,50 €</div>
                                 </div>
                             </div>
                         </div>
@@ -301,15 +215,25 @@
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat4')">🥫 Patés y conservas</div>
                         <div class="categoria-contenido">
                             <div class="productos-grid">
-                                <div class="producto-item" onclick="toggleItem('chk_m19', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m19')">
                                     <input type="checkbox" id="chk_m19" data-precio="7.40" data-nombre="Pimientos Txangurro" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>Bote Pimientos Rellenos de Txangurro</h4><p>Lukan Gourmet</p></div>
+                                    <div class="producto-info"><h4>Bote Pimientos Rellenos de Txangurro</h4><p>Lukan Gourmet • 300 GR</p></div>
                                     <div class="precio">7,40 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m20', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m20')">
                                     <input type="checkbox" id="chk_m20" data-precio="6.90" data-nombre="Paté de Faisán" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>Paté de Faisán</h4><p>Amo Conservas</p></div>
+                                    <div class="producto-info"><h4>Paté de Faisán</h4><p>Amo Conservas (Unidad)</p></div>
                                     <div class="precio">6,90 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m21')">
+                                    <input type="checkbox" id="chk_m21" data-precio="7.90" data-nombre="Paté de Centollo" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Paté de Centollo</h4><p>Conservas La Curiosa (Unidad)</p></div>
+                                    <div class="precio">7,90 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m22')">
+                                    <input type="checkbox" id="chk_m22" data-precio="8.50" data-nombre="Mejillones Fritos Escabeche" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Mejillones Fritos en Escabeche</h4><p>Doña Tomasa (Unidad)</p></div>
+                                    <div class="precio">8,50 €</div>
                                 </div>
                             </div>
                         </div>
@@ -320,15 +244,78 @@
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat5')">🥓 Embutidos</div>
                         <div class="categoria-contenido">
                             <div class="productos-grid">
-                                <div class="producto-item" onclick="toggleItem('chk_m23', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m23')">
                                     <input type="checkbox" id="chk_m23" data-precio="5.90" data-nombre="Sobre Pastrami Angus" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Sobre Pastrami de Angus</h4><p>Cardeña (100 GR)</p></div>
                                     <div class="precio">5,90 €</div>
                                 </div>
-                                <div class="producto-item" onclick="toggleItem('chk_m24', event)">
+                                <div class="producto-item" onclick="toggleItem('chk_m24')">
                                     <input type="checkbox" id="chk_m24" data-precio="5.90" data-nombre="Sobre Cecina Angus" data-tienda="Mesetarios" onchange="calcularTotal()">
-                                    <div class="producto-info"><h4>Sobre Cecina de Angus</h4><p>Rooftop Smokehouse</p></div>
+                                    <div class="producto-info"><h4>Sobre Cecina de Angus</h4><p>Rooftop Smokehouse (100 GR)</p></div>
                                     <div class="precio">5,90 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m25')">
+                                    <input type="checkbox" id="chk_m25" data-precio="8.50" data-nombre="Longaniza Payés" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Longaniza Payés</h4><p>Can Durán (Pieza 300 GR)</p></div>
+                                    <div class="precio">8,50 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m26')">
+                                    <input type="checkbox" id="chk_m26" data-precio="11.50" data-nombre="Sobrasada Can Company" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Sobrasada</h4><p>Can Company (Pieza 350 GR)</p></div>
+                                    <div class="precio">11,50 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA 6 -->
+                    <div class="categoria-desplegable" id="cat6">
+                        <div class="categoria-cabecera" onclick="toggleCategoria('cat6')">🍪 Dulces y chocolates</div>
+                        <div class="categoria-contenido">
+                            <div class="productos-grid">
+                                <div class="producto-item" onclick="toggleItem('chk_m27')">
+                                    <input type="checkbox" id="chk_m27" data-precio="13.50" data-nombre="Moscovitas Tradicionales" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Moscovitas Tradicionales</h4><p>Estuche 160 GR</p></div>
+                                    <div class="precio">13,50 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m28')">
+                                    <input type="checkbox" id="chk_m28" data-precio="7.50" data-nombre="Galletas de Nata" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Galletas de Nata</h4><p>Gallegas (160 GR)</p></div>
+                                    <div class="precio">7,50 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m29')">
+                                    <input type="checkbox" id="chk_m29" data-precio="7.25" data-nombre="Chocolate Nicaragua 70%" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Chocolate Nicaragua 70%</h4><p>Puchero (Unidad)</p></div>
+                                    <div class="precio">7,25 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m30')">
+                                    <input type="checkbox" id="chk_m30" data-precio="8.50" data-nombre="Chocolate Croissant 48%" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Chocolate Croissant 48%</h4><p>Puchero (Unidad)</p></div>
+                                    <div class="precio">8,50 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA 7 -->
+                    <div class="categoria-desplegable" id="cat7">
+                        <div class="categoria-cabecera" onclick="toggleCategoria('cat7')">🍯 Miel y mermeladas</div>
+                        <div class="categoria-contenido">
+                            <div class="productos-grid">
+                                <div class="producto-item" onclick="toggleItem('chk_m31')">
+                                    <input type="checkbox" id="chk_m31" data-precio="10.80" data-nombre="Tarro Miel Zumbando" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Tarro Miel 700 GR</h4><p>Zumbando (Unidad)</p></div>
+                                    <div class="precio">10,80 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m32')">
+                                    <input type="checkbox" id="chk_m32" data-precio="8.50" data-nombre="Tarro Miel Ocho Colmenas" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Tarro Miel 500 GR</h4><p>Ocho Colmenas (Unidad)</p></div>
+                                    <div class="precio">8,50 €</div>
+                                </div>
+                                <div class="producto-item" onclick="toggleItem('chk_m33')">
+                                    <input type="checkbox" id="chk_m33" data-precio="7.90" data-nombre="Mermelada Naranja Amarga" data-tienda="Mesetarios" onchange="calcularTotal()">
+                                    <div class="producto-info"><h4>Mermelada Naranja Amarga</h4><p>Lorusso 350 GR (Unidad)</p></div>
+                                    <div class="precio">7,90 €</div>
                                 </div>
                             </div>
                         </div>
@@ -341,9 +328,9 @@
             <div class="comercio-seccion" style="margin-top: 15px;">
                 <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
                 <div class="productos-grid">
-                    <div class="producto-item" onclick="toggleItem('chk_v1', event)">
+                    <div class="producto-item" onclick="toggleItem('chk_v1')">
                         <input type="checkbox" id="chk_v1" data-precio="11.90" data-nombre="Burguer Del Val Vegana" data-tienda="Vegg's" onchange="calcularTotal()">
-                        <div class="producto-info"><h4>Burguer Del Val Vegana</h4><p>Medallón artesanal vegetal</p></div>
+                        <div class="producto-info"><h4>Burguer Del Val Vegana</h4><p>Medallón artesanal con salsa de la casa</p></div>
                         <div class="precio">11,90 €</div>
                     </div>
                 </div>
@@ -388,13 +375,11 @@
             el.classList.toggle('abierto');
         }
 
-        function toggleItem(id, event) {
-            // Previene doble click cruzado si pinchan directo en la caja de input
-            if (event.target.tagName === 'INPUT') {
-                return; 
+        function toggleItem(id) {
+            if (event.target.tagName !== 'INPUT') {
+                const chk = document.getElementById(id);
+                chk.checked = !chk.checked;
             }
-            const chk = document.getElementById(id);
-            chk.checked = !chk.checked;
             calcularTotal();
         }
 
@@ -460,13 +445,13 @@
                     const itemsTienda = pedidoActivo.items.filter(i => i.tienda === tienda).map(i => i.item).join(', ');
                     
                     htmlC += `
-                        <div class="item-linea" style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; gap: 10px;">
+                        <div class="item-linea" style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0;">
                             <div>
                                 <b style="color:#2c3e50;">${tienda}</b><br>
                                 <span style="font-size:12px; color:#7f8c8d;">🛒 ${itemsTienda}</span>
                             </div>
                             <div>
-                                ${est === 'Preparando' ? `<button onclick="marcarListo('${tienda}')" style="background:#2ecc71; color:white; padding:6px 12px; font-size:12px; width:auto; margin:0; border-radius:6px;">Listo</button>` : `<span class="badge listo">✓ Listo</span>`}
+                                ${est === 'Preparando' ? `<button onclick="marcarListo('${tienda}')">Listo</button>` : `<span class="badge listo">✓ Listo</span>`}
                             </div>
                         </div>`;
                 }
@@ -482,7 +467,7 @@
                     <div class="alerta-pedido lista">
                         <p style="margin:0 0 8px 0; font-weight:bold; color:#1e4620;">⚡ ¡RUTA CONSOLIDADA POR FRISS!</p>
                         <span style="font-size:13px;">Recoge la cesta unificada en el Mercado y llévala a:<br>📍 <b>${pedidoActivo.direccion}</b></span>
-                        <button onclick="entregarPedido()" style="margin-top:12px; background:var(--info);">Marcar como Entregado</button>
+                        <button onclick="entregarPedido()" style="margin-top:12px;">Marcar como Entregado</button>
                     </div>`;
             } else if (fase === 'ENTREGADO') {
                 hubR.innerHTML = `<div style="background:#def7ec; color:#03543f; padding:15px; border-radius:8px; font-weight:bold; text-align:center;">✅ ¡Pedido #${pedidoActivo.id} entregado con éxito en Valladolid!</div>`;
