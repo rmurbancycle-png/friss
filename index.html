@@ -68,15 +68,18 @@
 
     <div class="dashboard">
 
+        <!-- 1. APP CLIENTE -->
         <div class="pantalla">
             <h2>📱 App Cliente</h2>
             
+            <!-- SECCIÓN: MERCADO DEL VAL -->
             <div class="comercio-seccion">
-                <div class="comercio-titulo">🥩 Mercado del Val (Mercado de Abastos)</div>
-                <div class="productos-grid">
-                    
+                <div class="comercio-titulo">🏛️ Mercado del Val (Mercado de Abastos)</div>
+                <p style="font-size: 12px; color: #7f8c8d; margin: 0 0 10px 5px;">Selecciona productos frescos y gourmet directamente de los puestos tradicionales.</p>
+            </div>
             
-            <div class="comercio-seccion">
+            <!-- SUB-COMERCIO: MESETARIOS -->
+            <div class="comercio-seccion" style="padding-left: 15px;">
                 <div class="comercio-titulo">🥩 Mesetarios (Gourmet & Selección)</div>
                 <div class="productos-grid">
                     
@@ -123,6 +126,7 @@
                 </div>
             </div>
 
+            <!-- OTRO COMERCIO -->
             <div class="comercio-seccion">
                 <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
                 <div class="productos-grid">
@@ -131,4 +135,143 @@
                         <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=120&auto=format&fit=crop&q=60" alt="Burger">
                         <div class="producto-info">
                             <h4>Burguer Del Val Vegana</h4>
-                            <p>Medallón artes
+                            <p>Medallón artesanal con salsa de la casa</p>
+                        </div>
+                        <div class="precio">11,90 €</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>DIRECCIÓN DE ENTREGA EN VALLADOLID</label>
+                <input type="text" id="direccion" value="Calle Santiago, 14, Valladolid">
+            </div>
+
+            <div class="total-box">
+                <span>Total Cesta:</span>
+                <span id="totalTxt">0,00 €</span>
+            </div>
+
+            <button onclick="lanzarPedido()">Enviar Pedido Combinado</button>
+        </div>
+
+        <!-- 2. HUB DE COMERCIOS -->
+        <div class="pantalla comercio">
+            <h2>🏪 Hub FRISS Comercios</h2>
+            <div id="hubComercios" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
+                Monitoreando la pasarela de pedidos activos...
+            </div>
+        </div>
+
+        <!-- 3. RIDER APP -->
+        <div class="pantalla rider">
+            <h2>🛵 FRISS Rider App</h2>
+            <div id="hubRider" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
+                Esperando la consolidación de rutas...
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let pedidoActivo = null;
+
+        function toggleCheck(id) {
+            const chk = document.getElementById(id);
+            if (event.target.tagName !== 'INPUT') {
+                chk.checked = !chk.checked;
+            }
+            calcularTotal();
+        }
+
+        function calcularTotal() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(chk => {
+                if(chk.checked) {
+                    total += parseFloat(chk.getAttribute('data-precio'));
+                }
+            });
+            document.getElementById('totalTxt').innerText = total.toFixed(2).replace('.', ',') + ' €';
+        }
+
+        function lanzarPedido() {
+            const seleccionados = [];
+            
+            if(document.getElementById('chk_m1').checked) seleccionados.push({ tienda: 'Mesetarios', item: 'Convento Las Claras' });
+            if(document.getElementById('chk_m2').checked) seleccionados.push({ tienda: 'Mesetarios', item: 'Emilio Moro VS' });
+            if(document.getElementById('chk_m3').checked) seleccionados.push({ tienda: 'Mesetarios', item: 'Queso Junco' });
+            if(document.getElementById('chk_m4').checked) seleccionados.push({ tienda: 'Mesetarios', item: 'Pimientos Txangurro' });
+            if(document.getElementById('chk_v1').checked) seleccionados.push({ tienda: "Vegg's", item: 'Burguer Del Val Vegana' });
+
+            if(seleccionados.length === 0) {
+                alert("Selecciona al menos un artículo para procesar la cesta.");
+                return;
+            }
+
+            pedidoActivo = {
+                id: Math.floor(Math.random() * 800) + 100,
+                direccion: document.getElementById('direccion').value,
+                items: seleccionados,
+                estados: {}
+            };
+
+            seleccionados.forEach(i => pedidoActivo.estados[i.tienda] = 'Preparando');
+            renderizarPaneles('NUEVO');
+        }
+
+        function marcarListo(tienda) {
+            pedidoActivo.estados[tienda] = 'Listo';
+            const todosListos = Object.values(pedidoActivo.estados).every(e => e === 'Listo');
+            renderizarPaneles(todosListos ? 'LOGISTICA_RIDER' : 'ACTUALIZADO');
+        }
+
+        function entregarPedido() {
+            renderizarPaneles('ENTREGADO');
+        }
+
+        function renderizarPaneles(fase) {
+            if(!pedidoActivo) return;
+
+            const hubC = document.getElementById('hubComercios');
+            if (fase !== 'ENTREGADO') {
+                let htmlC = `<div class="alerta-pedido"><p style="margin:0 0 10px 0; font-weight:bold;">📋 PEDIDO #${pedidoActivo.id}</p>`;
+                
+                for(let tienda in pedidoActivo.estados) {
+                    const est = pedidoActivo.estados[tienda];
+                    const itemsTienda = pedidoActivo.items.filter(i => i.tienda === tienda).map(i => i.item).join(', ');
+                    
+                    htmlC += `
+                        <div class="item-linea" style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0;">
+                            <div>
+                                <b style="color:#2c3e50;">${tienda}</b><br>
+                                <span style="font-size:12px; color:#7f8c8d;">🛒 ${itemsTienda}</span>
+                            </div>
+                            <div>
+                                ${est === 'Preparando' ? `<button onclick="marcarListo('${tienda}')">Listo</button>` : `<span class="badge listo">✓ Listo</span>`}
+                            </div>
+                        </div>`;
+                }
+                htmlC += `</div>`;
+                hubC.innerHTML = htmlC;
+            } else {
+                hubC.innerHTML = `<div style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">Monitoreando la pasarela de pedidos activos...</div>`;
+            }
+
+            const hubR = document.getElementById('hubRider');
+            if(fase === 'LOGISTICA_RIDER') {
+                hubR.innerHTML = `
+                    <div class="alerta-pedido lista">
+                        <p style="margin:0 0 8px 0; font-weight:bold; color:#1e4620;">⚡ ¡RUTA CONSOLIDADA POR FRISS!</p>
+                        <span style="font-size:13px;">Recoge la cesta unificada en el Mercado y llévala a:<br>📍 <b>${pedidoActivo.direccion}</b></span>
+                        <button onclick="entregarPedido()" style="margin-top:12px;">Marcar como Entregado</button>
+                    </div>`;
+            } else if (fase === 'ENTREGADO') {
+                hubR.innerHTML = `<div style="background:#def7ec; color:#03543f; padding:15px; border-radius:8px; font-weight:bold; text-align:center;">✅ ¡Pedido #${pedidoActivo.id} entregado con éxito en Valladolid!</div>`;
+            } else {
+                hubR.innerHTML = `<div style="text-align:center; color:#7f8c8d;">⏳ Esperando que los puestos del mercado completen la cesta unificada...</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
