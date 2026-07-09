@@ -26,7 +26,10 @@
         h2 { margin-top: 0; font-size: 20px; border-bottom: 2px solid #edf2f7; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         
         .comercio-seccion { margin-bottom: 20px; }
-        .comercio-titulo { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #34495e; border-left: 4px solid var(--primary); padding-left: 8px; }
+        .comercio-titulo { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #34495e; border-left: 4px solid var(--primary); padding-left: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* Mini logo del comercio */
+        .comercio-logo { width: 24px; height: 24px; border-radius: 4px; object-fit: cover; }
         
         /* Estilos de los Desplegables (Acordeón) */
         .categoria-desplegable { margin-bottom: 8px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
@@ -37,7 +40,7 @@
         .categoria-contenido { display: none; padding: 10px; background: #fff; border-top: 1px solid #edf2f7; }
         .categoria-desplegable.abierto .categoria-contenido { display: block; }
 
-        /* Lista de Productos Simplicada (Sin fotos) */
+        /* Lista de Productos Simplificada (Sin fotos) */
         .productos-grid { display: flex; flex-direction: column; gap: 8px; }
         .producto-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
         .producto-item:hover { background: #fffaf5; }
@@ -76,15 +79,21 @@
 
     <div class="dashboard">
 
+        <!-- 1. APP CLIENTE -->
         <div class="pantalla">
             <h2>📱 App Cliente</h2>
             
             <div class="comercio-seccion">
                 <div class="comercio-titulo">🏛️ Mercado del Val (Mercado de Abastos)</div>
                 
+                <!-- PUESTO: MESETARIOS (CON LOGO OFICIAL) -->
                 <div style="margin-left: 10px; margin-top: 10px;">
-                    <p style="font-weight: bold; margin: 0 0 10px 0; font-size: 14px; color: var(--dark);">🥩 Mesetarios (Gourmet & Selección)</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <img src="mesetarios-logo.png" alt="Mesetarios Logo" class="comercio-logo" onerror="this.style.display='none'">
+                        <p style="font-weight: bold; margin: 0; font-size: 14px; color: var(--dark);">Mesetarios (Gourmet & Selección)</p>
+                    </div>
                     
+                    <!-- CATEGORÍA 1 -->
                     <div class="categoria-desplegable" id="cat1">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat1')">🍷 Vinos y licores</div>
                         <div class="categoria-contenido">
@@ -133,6 +142,7 @@
                         </div>
                     </div>
 
+                    <!-- CATEGORÍA 2 -->
                     <div class="categoria-desplegable" id="cat2">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat2')">🫒 Aceite de oliva</div>
                         <div class="categoria-contenido">
@@ -161,6 +171,7 @@
                         </div>
                     </div>
 
+                    <!-- CATEGORÍA 3 -->
                     <div class="categoria-desplegable" id="cat3">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat3')">🧀 Quesos</div>
                         <div class="categoria-contenido">
@@ -199,6 +210,7 @@
                         </div>
                     </div>
 
+                    <!-- CATEGORÍA 4 -->
                     <div class="categoria-desplegable" id="cat4">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat4')">🥫 Patés y conservas</div>
                         <div class="categoria-contenido">
@@ -227,6 +239,7 @@
                         </div>
                     </div>
 
+                    <!-- CATEGORÍA 5 -->
                     <div class="categoria-desplegable" id="cat5">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat5')">🥓 Embutidos</div>
                         <div class="categoria-contenido">
@@ -234,27 +247,28 @@
                                 <div class="producto-item" onclick="toggleItem('chk_m23')">
                                     <input type="checkbox" id="chk_m23" data-precio="5.90" data-nombre="Sobre Pastrami Angus" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Sobre Pastrami de Angus</h4><p>Cardeña (100 GR)</p></div>
-                                    <div class="precio">5.90 €</div>
+                                    <div class="precio">5,90 €</div>
                                 </div>
                                 <div class="producto-item" onclick="toggleItem('chk_m24')">
                                     <input type="checkbox" id="chk_m24" data-precio="5.90" data-nombre="Sobre Cecina Angus" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Sobre Cecina de Angus</h4><p>Rooftop Smokehouse (100 GR)</p></div>
-                                    <div class="precio">5.90 €</div>
+                                    <div class="precio">5,90 €</div>
                                 </div>
                                 <div class="producto-item" onclick="toggleItem('chk_m25')">
                                     <input type="checkbox" id="chk_m25" data-precio="8.50" data-nombre="Longaniza Payés" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Longaniza Payés</h4><p>Can Durán (Pieza 300 GR)</p></div>
-                                    <div class="precio">8.50 €</div>
+                                    <div class="precio">8,50 €</div>
                                 </div>
                                 <div class="producto-item" onclick="toggleItem('chk_m26')">
                                     <input type="checkbox" id="chk_m26" data-precio="11.50" data-nombre="Sobrasada Can Company" data-tienda="Mesetarios" onchange="calcularTotal()">
                                     <div class="producto-info"><h4>Sobrasada</h4><p>Can Company (Pieza 350 GR)</p></div>
-                                    <div class="precio">11.50 €</div>
+                                    <div class="precio">11,50 €</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- CATEGORÍA 6 -->
                     <div class="categoria-desplegable" id="cat6">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat6')">🍪 Dulces y chocolates</div>
                         <div class="categoria-contenido">
@@ -283,6 +297,7 @@
                         </div>
                     </div>
 
+                    <!-- CATEGORÍA 7 -->
                     <div class="categoria-desplegable" id="cat7">
                         <div class="categoria-cabecera" onclick="toggleCategoria('cat7')">🍯 Miel y mermeladas</div>
                         <div class="categoria-contenido">
@@ -309,6 +324,7 @@
                 </div>
             </div>
 
+            <!-- OTRO COMERCIO -->
             <div class="comercio-seccion" style="margin-top: 15px;">
                 <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
                 <div class="productos-grid">
@@ -333,6 +349,7 @@
             <button onclick="lanzarPedido()">Enviar Pedido Combinado</button>
         </div>
 
+        <!-- 2. HUB DE COMERCIOS -->
         <div class="pantalla comercio">
             <h2>🏪 Hub FRISS Comercios</h2>
             <div id="hubComercios" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
@@ -340,6 +357,7 @@
             </div>
         </div>
 
+        <!-- 3. RIDER APP -->
         <div class="pantalla rider">
             <h2>🛵 FRISS Rider App</h2>
             <div id="hubRider" style="color: #7f8c8d; font-style: italic; text-align: center; margin-top: 40px;">
