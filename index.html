@@ -1,4 +1,5 @@
 npm install express ws
+node friss.js
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
@@ -15,28 +16,27 @@ let comerciosActivos = {
 };
 let ridersActivos = [];
 
-// --- SERVIDOR HTTP (Para crear pedidos y ver estado) ---
+// --- SERVIDOR HTTP ---
 
-// 1. Endpoint para que el cliente haga un pedido (¡Permite cesta única!)
+// 1. Endpoint para crear un pedido combinado
 app.post('/api/pedido', (req, res) => {
     const { cliente, direccion, productos } = req.body; 
-    // Ejemplo productos: [{ comercio: 'mesetarios', item: 'Jamón' }, { comercio: 'veggs', item: 'Burguer' }]
 
     const nuevoPedido = {
         id: pedidos.length + 1,
         cliente,
         direccion,
-        productos,
-        estado: 'Recibido en Mercado del Val',
+        productos: productos.map(p => ({ ...p, estado: 'Pendiente' })), // Cada producto empieza pendiente
+        estado General: 'Preparando en el Mercado',
         fecha: new Date()
     };
 
     pedidos.push(nuevoPedido);
 
-    // NOTIFICAR A CADA COMERCIO IMPLICADO VIA WEBSOCKET
+    // Notificar a los comercios implicados
     productos.forEach(p => {
         const comercio = comerciosActivos[p.comercio];
-        if (comercio && comercio.ws) {
+        if (comercio && comercio.ws && comercio.ws.readyState === WebSocket.OPEN) {
             comercio.ws.send(JSON.stringify({
                 evento: 'NUEVO_PEDIDO_PRODUCTO',
                 pedidoId: nuevoPedido.id,
@@ -46,33 +46,23 @@ app.post('/api/pedido', (req, res) => {
         }
     });
 
-    // NOTIFICAR A LOS RIDERS DISPONIBLES EN VALLADOLID
-    ridersActivos.forEach(riderWs => {
-        if (riderWs.readyState === WebSocket.OPEN) {
-            riderWs.send(JSON.stringify({
-                evento: 'NUEVO_VIAJE_DISPONIBLE',
-                pedidoId: nuevoPedido.id,
-                recogida: 'Mercado del Val (Hub)',
-                destino: direccion
-            }));
-        }
+    res.status(201).json({ 
+        mensaje: "Pedido procesado y notificado al Mercado del Val", 
+        pedidoId: nuevoPedido.id 
     });
-
-    res.status(201).json({ mensaje: "Pedido procesado y enviado al Mercado del Val", pedidoId: nuevoPedido.id });
 });
 
-// 2. Endpoint para ver el historial o estado de los pedidos
+// 2. Historial de pedidos
 app.get('/api/pedidos', (req, res) => {
     res.json(pedidos);
 });
 
 
-// --- SERVIDOR WEBSOCKET (Tiempo real para Comercios y Riders) ---
+// --- SERVIDOR WEBSOCKET (Tiempo Real) ---
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws, req) => {
-    // Detectamos quién se conecta por la URL (ej: /?rol=mesetarios o /?rol=rider)
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const rol = urlParams.get('rol');
 
@@ -84,22 +74,54 @@ wss.on('connection', (ws, req) => {
         console.log(`🛵 Repartidor conectado en Valladolid listo para reparto.`);
     }
 
-    // Escuchar acciones (ej: cuando el comercio dice "pedido listo" o el rider "pedido entregado")
+    // LÓGICA DE MENSAJES CORREGIDA (Para procesar las acciones)
     ws.on('message', (message) => {
-        const data = JSON.parse(message);
-        console.log(`[Evento recibido de ${rol}]:`, data);
-        
-        // Aquí añadiremos las lógicas de cambio de estado que me vayas pidiendo
+        try {
+            const data = JSON.parse(message);
+            console.log(`[Evento recibido de ${rol}]:`, data);
+
+            // Acción: El comercio avisa que terminó su producto
+            if (data.evento === 'PRODUCTO_LISTO') {
+                let pedido = pedidos.find(p => p.id === data.pedidoId);
+                if (pedido) {
+                    let prod = pedido.productos.find(p => p.comercio === rol);
+                    if (prod) prod.estado = 'Listo';
+
+                    // Comprobar si TODOS los productos del pedido en el mercado están listos
+                    let todoListo = pedido.productos.every(p => p.estado === 'Listo');
+                    
+                    if (todoListo) {
+                        pedido.estadoGeneral = 'Listo para recogida';
+                        // Avisar inmediatamente a los riders de Valladolid
+                        ridersActivos.forEach(rider => {
+                            if (rider.readyState === WebSocket.OPEN) {
+                                rider.send(JSON.stringify({
+                                    evento: 'NUEVO_VIAJE_DISPONIBLE',
+                                    pedidoId: pedido.id,
+                                    recogida: 'Mercado del Val (Hub)',
+                                    destino: pedido.direccion
+                                }));
+                            }
+                        });
+                    }
+                }
+            }
+        } catch (err) {
+            console.error("Error al procesar mensaje JSON:", err);
+        }
     });
 
     ws.on('close', () => {
-        if (comerciosActivos[rol]) comerciosActivos[rol].ws = null;
+        if (comerciosActivos[rol] && comerciosActivos[rol].ws === ws) {
+            comerciosActivos[rol].ws = null;
+        }
         ridersActivos = ridersActivos.filter(r => r !== ws);
+        console.log(`❌ Conexión cerrada para el rol: ${rol}`);
     });
 });
 
 const PORT = 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Friss Engine corriendo en http://localhost:${PORT}`);
+    console.log(`🚀 Friss Engine corriendo de forma segura en http://localhost:${PORT}`);
     console.log(`📍 Hub Centralizado: Mercado del Val, Valladolid.`);
 });
