@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valshopper MVP - Mercado del Val</title>
+    <title>FRISS MVP - venta online VALLADOLID</title>
     <style>
         :root {
             --primary: #e67e22;
@@ -60,16 +60,31 @@
 </head>
 <body>
 
-    <h1>🛍️ Valshopper Marketplace</h1>
-    <div class="sub">Plataforma Logística Multitienda • Mercado del Val, Valladolid</div>
+    <h1>🛍️ FRISS Marketplace</h1>
+    <div class="sub">Plataforma Logística Multitienda • Valladolid</div>
 
     <div class="dashboard">
 
         <div class="pantalla">
             <h2>📱 App Cliente</h2>
+
             
             <div class="comercio-seccion">
-                <div class="comercio-titulo">🥩 Mesetarios (Embutidos Premium)</div>
+                <div class="comercio-titulo">🥩 Mercado del Val (El de toda la vida)</div>
+                <div class="producto-card" onclick="toggleCheck('chk1')">
+                    <input type="checkbox" id="chk1" value="Mercado del Val|melocotones|8.95" onchange="calcularTotal()">
+                    <img src="https://images.unsplash.com/photo-1626202353344-93c316719b26?w=150&auto=format&fit=crop&q=60" alt="Ibérico">
+                    <div class="producto-info">
+                        <h4>Melocotones</h4>
+                        <p>Melocotones.</p>
+                    </div>
+                    <div class="precio">8.95€</div>
+                </div>
+            </div>
+
+            
+            <div class="comercio-seccion">
+                <div class="comercio-titulo">🥩 Mesetarios (Productos delicatessen)</div>
                 <div class="producto-card" onclick="toggleCheck('chk1')">
                     <input type="checkbox" id="chk1" value="Mesetarios|Tabla Ibérica Selección|14.50" onchange="calcularTotal()">
                     <img src="https://images.unsplash.com/photo-1626202353344-93c316719b26?w=150&auto=format&fit=crop&q=60" alt="Ibérico">
@@ -82,7 +97,7 @@
             </div>
 
             <div class="comercio-seccion">
-                <div class="comercio-titulo">🌱 Vegg's (Plant-Based Food)</div>
+                <div class="comercio-titulo">🌱 Vegg's (Alimentación ecológica y natural)</div>
                 <div class="producto-card" onclick="toggleCheck('chk2')">
                     <input type="checkbox" id="chk2" value="Vegg's|Burguer Del Val Vegana|11.90" onchange="calcularTotal()">
                     <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=150&auto=format&fit=crop&q=60" alt="Burger">
@@ -95,7 +110,7 @@
             </div>
 
             <div class="comercio-seccion">
-                <div class="comercio-titulo">🍰 El Bombón (Pastelería Fina)</div>
+                <div class="comercio-titulo">🍰 El Bombón (Pastelería)</div>
                 <div class="producto-card" onclick="toggleCheck('chk3')">
                     <input type="checkbox" id="chk3" value="El Bombón|Pack 4 Pasteles de Nata|6.00" onchange="calcularTotal()">
                     <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=150&auto=format&fit=crop&q=60" alt="Dulce">
