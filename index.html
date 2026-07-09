@@ -70,10 +70,7 @@
         .badge.listo { background: #def7ec; color: #03543f; }
         
         .total-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin-top: 15px; display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; }
-    </style>
-</head>
-<body>
-.header-friss{
+        .header-friss{
     background:#fff;
     border-radius:18px;
     padding:25px;
@@ -106,6 +103,14 @@
     transform:scale(1.08);
 }
 
+    </style>
+</head>
+<body>
+<header class="header-friss">
+
+    <img src="Friss recortado.PNG" alt="FRISS" class="logo-principal">
+
+</header>
     <div class="dashboard">
 
         <!-- 1. APP CLIENTE -->
@@ -355,20 +360,39 @@
             </div>
 
             <!-- OTRO COMERCIO -->
-            <div class="comercio-seccion"
-                <div style="display:flex;align-items:center;gap:10px;">
-    <img src="veggs-logo.png" class="comercio-logo">
-    <strong>Vegg's</strong>
-    <span style="color:#666;">Alimentación ecológica y natural</span>
-</div>
-                <div class="productos-grid">
-                    <div class="producto-item" onclick="toggleItem('chk_v1')">
-                        <input type="checkbox" id="chk_v1" data-precio="11.90" data-nombre="Burguer Del Val Vegana" data-tienda="Vegg's" onchange="calcularTotal()">
-                        <div class="producto-info"><h4>Burguer Del Val Vegana</h4><p>Medallón artesanal con salsa de la casa</p></div>
-                        <div class="precio">11,90 €</div>
-                    </div>
-                </div>
+        <!-- OTRO COMERCIO -->
+<div class="comercio-seccion">
+
+    <div style="display:flex;align-items:center;gap:10px;">
+        <img src="logo vegg´s.jpg" class="comercio-logo" alt="Vegg's">
+        <strong>Vegg's</strong>
+        <span style="color:#666;">Alimentación ecológica y natural</span>
+    </div>
+
+    <div class="productos-grid">
+
+        <div class="producto-item" onclick="toggleItem('chk_v1')">
+
+            <input
+                type="checkbox"
+                id="chk_v1"
+                data-precio="11.90"
+                data-nombre="Burguer Del Val Vegana"
+                data-tienda="Vegg's"
+                onchange="calcularTotal()">
+
+            <div class="producto-info">
+                <h4>Burguer Del Val Vegana</h4>
+                <p>Medallón artesanal con salsa de la casa</p>
             </div>
+
+            <div class="precio">11,90 €</div>
+
+        </div>
+
+    </div>
+
+</div>
 
             <div class="input-group">
                 <label>DIRECCIÓN DE ENTREGA EN VALLADOLID</label>
