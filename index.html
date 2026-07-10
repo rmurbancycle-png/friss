@@ -928,7 +928,12 @@ Continuar
 </section>
   <script>
 
-const productos=[
+const categorias=[
+
+{
+nombre:"🥥 Aceites y Condimentos",
+
+productos:[
 
 {
 id:1,
@@ -952,18 +957,57 @@ nombre:"Aceite de Coco Virgen",
 descripcion:"550 g",
 precio:8.90,
 imagen:"https://picsum.photos/300/220?random=3"
+}
+
+]
+
 },
 
 {
+
+nombre:"🥤 Bebidas",
+
+productos:[
+
+{
 id:4,
-nombre:"Tamari Bio",
-descripcion:"500 ml",
-precio:10.29,
+nombre:"Bebida de Avena",
+descripcion:"1 litro",
+precio:1.65,
 imagen:"https://picsum.photos/300/220?random=4"
+},
+
+{
+id:5,
+nombre:"Bebida de Arroz",
+descripcion:"1 litro",
+precio:2.29,
+imagen:"https://picsum.photos/300/220?random=5"
+}
+
+]
+
+},
+
+{
+
+nombre:"🍫 Dulces",
+
+productos:[
+
+{
+id:6,
+nombre:"Chocolate 100%",
+descripcion:"100 gramos",
+precio:3.75,
+imagen:"https://picsum.photos/300/220?random=6"
+}
+
+]
+
 }
 
 ];
-
 let carrito=[];
 
 const catalogo=document.getElementById("catalogoProductos");
@@ -972,9 +1016,35 @@ function pintarCatalogo(){
 
 catalogo.innerHTML="";
 
-productos.forEach(p=>{
+categorias.forEach(categoria=>{
 
 catalogo.innerHTML+=`
+
+<div class="categoria">
+
+<h2 class="tituloCategoria">
+
+${categoria.nombre}
+
+</h2>
+
+<div
+class="productos-grid"
+id="cat${categoria.nombre.replace(/\W/g,'')}">
+
+</div>
+
+</div>
+
+`;
+
+const contenedor=document.getElementById(
+"cat"+categoria.nombre.replace(/\W/g,'')
+);
+
+categoria.productos.forEach(p=>{
+
+contenedor.innerHTML+=`
 
 <div class="producto">
 
@@ -994,7 +1064,9 @@ ${p.precio.toFixed(2)} €
 
 </div>
 
-<button class="add" onclick="agregar(${p.id})">
+<button
+class="add"
+onclick="agregar(${p.id})">
 
 +
 
@@ -1010,11 +1082,15 @@ ${p.precio.toFixed(2)} €
 
 });
 
+});
+
 }
 
 function agregar(id){
 
-const producto=productos.find(p=>p.id===id);
+const producto=categorias
+.flatMap(c=>c.productos)
+.find(p=>p.id===id);
 
 carrito.push(producto);
 
