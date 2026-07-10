@@ -221,12 +221,144 @@ font-size: 26px; }
 }
 
     </style>
+    /* ===========================
+   HERO
+===========================*/
+
+.hero{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    text-align:center;
+
+    margin:30px auto;
+
+    max-width:1450px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.05);
+
+}
+
+.hero h1{
+
+    margin:20px 0 10px;
+
+    font-size:38px;
+
+    color:#111827;
+
+}
+
+.hero-sub{
+
+    color:#6b7280;
+
+    font-size:18px;
+
+    margin-bottom:30px;
+
+}
+
+.logo-principal{
+
+    width:260px;
+
+}
+
+.buscador{
+
+    max-width:650px;
+
+    margin:auto;
+
+}
+
+.buscador input{
+
+    width:100%;
+
+    padding:18px 24px;
+
+    border-radius:50px;
+
+    border:1px solid #e5e7eb;
+
+    font-size:16px;
+
+    background:#f8fafc;
+
+}
+
+.hero-info{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.pill{
+
+    background:#f3f4f6;
+
+    padding:12px 20px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
    <link rel="stylesheet" href="css/estilos.css"> 
 </head>
 <body>
    <img src="Friss recortado.PNG" alt="FRISS" class="logo-principal">
+<header class="hero">
+
+    <img src="Friss recortado.PNG" class="logo-principal" alt="FRISS">
+
+    <h1>Compra en el Mercado del Val</h1>
+
+    <p class="hero-sub">
+        Productos frescos y ecológicos de comercios locales con un único pedido.
+    </p>
+
+    <div class="buscador">
+
+        <input
+            type="text"
+            placeholder="🔍 Buscar productos...">
+
+    </div>
+
+    <div class="hero-info">
+
+        <div class="pill">
+
+            📍 Valladolid
+
+        </div>
+
+        <div class="pill">
+
+            🚚 Entrega en menos de 60 minutos
+
+        </div>
+
+    </div>
 
 </header>
+
+<div class="dashboard">
     <div class="dashboard">
 
         <!-- 1. APP CLIENTE -->
