@@ -350,7 +350,175 @@ font-size:30px;
 }
 
 }
+/*********************************
 
+MARKETPLACE
+
+*********************************/
+
+.market{
+
+padding:60px 0;
+
+}
+
+.market-layout{
+
+display:grid;
+
+grid-template-columns:2fr 380px;
+
+gap:35px;
+
+align-items:start;
+
+}
+
+.productos-panel{
+
+background:white;
+
+border-radius:22px;
+
+padding:30px;
+
+box-shadow:var(--sombra);
+
+}
+
+.tabs{
+
+display:flex;
+
+gap:12px;
+
+margin:30px 0;
+
+flex-wrap:wrap;
+
+}
+
+.tab{
+
+background:#eef2f7;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+font-weight:600;
+
+}
+
+.tab.activo{
+
+background:var(--verde);
+
+color:white;
+
+}
+
+.carrito{
+
+position:sticky;
+
+top:110px;
+
+background:white;
+
+padding:30px;
+
+border-radius:22px;
+
+box-shadow:var(--sombra);
+
+}
+
+.carrito h2{
+
+margin-bottom:25px;
+
+}
+
+#carritoVacio{
+
+color:#9ca3af;
+
+font-size:15px;
+
+padding:20px 0;
+
+}
+
+.resumen{
+
+margin-top:30px;
+
+}
+
+.resumen div{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:12px 0;
+
+}
+
+.total{
+
+font-size:20px;
+
+font-weight:700;
+
+}
+
+.comprar{
+
+margin-top:20px;
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:14px;
+
+background:var(--verde);
+
+color:white;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+@media(max-width:1100px){
+
+.market-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.carrito{
+
+position:relative;
+
+top:0;
+
+}
+
+}
 </style>
 
 </head>
@@ -478,6 +646,214 @@ Entrar
 </a>
 
 </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== -->
+<!-- MARKETPLACE -->
+<!-- ===================== -->
+
+<section class="market">
+
+<div class="container">
+
+<div class="market-layout">
+
+<!-- COLUMNA IZQUIERDA -->
+
+<div class="productos-panel">
+
+<h2>Explora los comercios</h2>
+
+<div class="tabs">
+
+<button class="tab activo">🥦 Vegg's</button>
+
+<button class="tab">🥩 Mercado del Val</button>
+
+<button class="tab">🧀 Mesetarios</button>
+
+</div>
+
+<div id="catalogo">
+
+<!-- Aquí aparecerán los productos -->
+
+</div>
+
+</div>
+
+<!-- CARRITO -->
+
+<aside class="carrito">
+
+<h2>🛒 Tu compra</h2>
+
+<div id="carritoVacio">
+
+Todavía no has añadido productos.
+
+</div>
+
+<div id="carritoItems"></div>
+
+<div class="resumen">
+
+<div>
+
+<span>Subtotal</span>
+
+<strong id="subtotal">
+
+0,00 €
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Entrega</span>
+
+<strong>
+
+2,90 €
+
+</strong>
+
+</div>
+
+<hr>
+
+<div class="total">
+
+<span>Total</span>
+
+<strong id="total">
+
+2,90 €
+
+</strong>
+
+</div>
+
+<button class="comprar">
+
+Continuar pedido
+
+</button>
+
+</div>
+
+</aside>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== -->
+<!-- MARKETPLACE -->
+<!-- ===================== -->
+
+<section class="market">
+
+<div class="container">
+
+<div class="market-layout">
+
+<!-- COLUMNA IZQUIERDA -->
+
+<div class="productos-panel">
+
+<h2>Explora los comercios</h2>
+
+<div class="tabs">
+
+<button class="tab activo">🥦 Vegg's</button>
+
+<button class="tab">🥩 Mercado del Val</button>
+
+<button class="tab">🧀 Mesetarios</button>
+
+</div>
+
+<div id="catalogo">
+
+<!-- Aquí aparecerán los productos -->
+
+</div>
+
+</div>
+
+<!-- CARRITO -->
+
+<aside class="carrito">
+
+<h2>🛒 Tu compra</h2>
+
+<div id="carritoVacio">
+
+Todavía no has añadido productos.
+
+</div>
+
+<div id="carritoItems"></div>
+
+<div class="resumen">
+
+<div>
+
+<span>Subtotal</span>
+
+<strong id="subtotal">
+
+0,00 €
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Entrega</span>
+
+<strong>
+
+2,90 €
+
+</strong>
+
+</div>
+
+<hr>
+
+<div class="total">
+
+<span>Total</span>
+
+<strong id="total">
+
+2,90 €
+
+</strong>
+
+</div>
+
+<button class="comprar">
+
+Continuar pedido
+
+</button>
+
+</div>
+
+</aside>
 
 </div>
 
