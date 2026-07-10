@@ -46,6 +46,81 @@ max-width:1450px;
 margin:auto;
 
 }
+  #carritoItems{
+
+margin-top:20px;
+
+}
+
+.itemCarrito{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.itemInfo{
+
+flex:1;
+
+}
+
+.itemInfo h4{
+
+font-size:15px;
+
+margin-bottom:5px;
+
+}
+
+.itemInfo p{
+
+font-size:13px;
+
+color:#666;
+
+}
+
+.itemPrecio{
+
+font-weight:700;
+
+color:#17B26A;
+
+margin-top:4px;
+
+}
+
+.eliminar{
+
+background:#ef4444;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+padding:8px 12px;
+
+cursor:pointer;
+
+}
+
+#carritoVacio{
+
+color:#777;
+
+margin-top:20px;
+
+}
   /*==========================
 PRODUCTOS
 ==========================*/
@@ -755,17 +830,33 @@ Entrar
 
 <h2>🛒 Tu cesta</h2>
 
-<p style="margin-top:20px;color:#6B7280">
+<div id="carritoVacio">
 
 Todavía no has añadido productos.
 
-</p>
+</div>
+
+<div id="carritoItems"></div>
 
 <div class="total">
 
 <span>Total</span>
 
-<span>0,00 €</span>
+<span id="total">
+
+0,00 €
+
+</span>
+
+</div>
+
+<button class="checkout">
+
+Continuar pedido
+
+</button>
+
+</aside>
 
 </div>
 
@@ -804,8 +895,8 @@ imagen:"https://picsum.photos/300/220?random=2"
 
 {
 id:3,
-nombre:"Aceite de Coco",
-descripcion:"550 g · Vegg's",
+nombre:"Aceite de Coco Virgen",
+descripcion:"550 g",
 precio:8.90,
 imagen:"https://picsum.photos/300/220?random=3"
 },
@@ -820,7 +911,13 @@ imagen:"https://picsum.photos/300/220?random=4"
 
 ];
 
+let carrito=[];
+
 const catalogo=document.getElementById("catalogoProductos");
+
+function pintarCatalogo(){
+
+catalogo.innerHTML="";
 
 productos.forEach(p=>{
 
@@ -844,7 +941,7 @@ ${p.precio.toFixed(2)} €
 
 </div>
 
-<button class="add">
+<button class="add" onclick="agregar(${p.id})">
 
 +
 
@@ -860,8 +957,88 @@ ${p.precio.toFixed(2)} €
 
 });
 
-</script>
+}
 
-</body>
+function agregar(id){
 
-</html>
+const producto=productos.find(p=>p.id===id);
+
+carrito.push(producto);
+
+actualizarCarrito();
+
+}
+
+function eliminar(indice){
+
+carrito.splice(indice,1);
+
+actualizarCarrito();
+
+}
+
+function actualizarCarrito(){
+
+const lista=document.getElementById("carritoItems");
+
+const vacio=document.getElementById("carritoVacio");
+
+lista.innerHTML="";
+
+let total=0;
+
+if(carrito.length===0){
+
+vacio.style.display="block";
+
+}else{
+
+vacio.style.display="none";
+
+}
+
+carrito.forEach((p,i)=>{
+
+total+=p.precio;
+
+lista.innerHTML+=`
+
+<div class="itemCarrito">
+
+<div class="itemInfo">
+
+<h4>${p.nombre}</h4>
+
+<p>${p.descripcion}</p>
+
+<div class="itemPrecio">
+
+${p.precio.toFixed(2)} €
+
+</div>
+
+</div>
+
+<button class="eliminar"
+
+onclick="eliminar(${i})">
+
+🗑
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("total").innerHTML=
+
+total.toFixed(2).replace(".",",")+" €";
+
+}
+
+pintarCatalogo();
+
+
