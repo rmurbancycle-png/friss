@@ -14,6 +14,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+   #carritoItems button{
+
+background:#ef4444;
+
+border:none;
+
+color:white;
+
+border-radius:8px;
+
+padding:6px 10px;
+
+cursor:pointer;
+
+} 
 
 *{
     margin:0;
@@ -987,9 +1002,170 @@ Continuar pedido
 </div>
 
 </section>
-    <script>
 
-const productos=[
+   <script>
+
+const productos = [
+
+{
+id:1,
+nombre:"Vinagre de Manzana",
+descripcion:"750 ml · Voelkel",
+precio:4.69,
+imagen:"https://via.placeholder.com/300x220?text=Vinagre"
+},
+
+{
+id:2,
+nombre:"Vinagre de Granada",
+descripcion:"500 ml · Ecovinal",
+precio:4.20,
+imagen:"https://via.placeholder.com/300x220?text=Granada"
+},
+
+{
+id:3,
+nombre:"Mantequilla Ghee",
+descripcion:"245 gr",
+precio:12.65,
+imagen:"https://via.placeholder.com/300x220?text=Ghee"
+},
+
+{
+id:4,
+nombre:"Tamari Bio",
+descripcion:"500 ml",
+precio:10.29,
+imagen:"https://via.placeholder.com/300x220?text=Tamari"
+}
+
+];
+
+let carrito=[];
+
+const catalogo=document.getElementById("catalogo");
+
+function pintarCatalogo(){
+
+catalogo.innerHTML="";
+
+productos.forEach(p=>{
+
+catalogo.innerHTML+=`
+
+<div class="producto">
+
+<img src="${p.imagen}">
+
+<div class="producto-body">
+
+<h3>${p.nombre}</h3>
+
+<p>${p.descripcion}</p>
+
+<div class="precio-linea">
+
+<div class="precio">
+
+${p.precio.toFixed(2)} €
+
+</div>
+
+<button class="add"
+
+onclick="agregar(${p.id})">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+function agregar(id){
+
+const producto=productos.find(p=>p.id===id);
+
+carrito.push(producto);
+
+actualizarCarrito();
+
+}
+
+function actualizarCarrito(){
+
+const lista=document.getElementById("carritoItems");
+
+const vacio=document.getElementById("carritoVacio");
+
+let subtotal=0;
+
+lista.innerHTML="";
+
+if(carrito.length===0){
+
+vacio.style.display="block";
+
+}else{
+
+vacio.style.display="none";
+
+}
+
+carrito.forEach((p,i)=>{
+
+subtotal+=p.precio;
+
+lista.innerHTML+=`
+
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;">
+
+<div>
+
+<strong>${p.nombre}</strong><br>
+
+<small>${p.precio.toFixed(2)} €</small>
+
+</div>
+
+<button onclick="eliminar(${i})">
+
+🗑
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("subtotal").innerHTML=subtotal.toFixed(2)+" €";
+
+document.getElementById("total").innerHTML=(subtotal+2.90).toFixed(2)+" €";
+
+}
+
+function eliminar(i){
+
+carrito.splice(i,1);
+
+actualizarCarrito();
+
+}
+
+pintarCatalogo();
+
+</script> 
 
 {
 
