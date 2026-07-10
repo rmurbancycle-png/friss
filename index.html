@@ -14,6 +14,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+   .categoria{
+
+margin-bottom:45px;
+
+}
+
+.tituloCategoria{
+
+margin-bottom:25px;
+
+font-size:28px;
+
+font-weight:700;
+
+color:#222;
+
+}
    #carritoItems button{
 
 background:#ef4444;
@@ -1005,7 +1022,11 @@ Continuar pedido
 
    <script>
 
-const productos = [
+const categorias = [
+
+{
+nombre:"🥥 Aceites y Condimentos",
+productos:[
 
 {
 id:1,
@@ -1033,10 +1054,56 @@ imagen:"https://via.placeholder.com/300x220?text=Ghee"
 
 {
 id:4,
-nombre:"Tamari Bio",
+nombre:"Tamari",
 descripcion:"500 ml",
 precio:10.29,
 imagen:"https://via.placeholder.com/300x220?text=Tamari"
+}
+
+]
+
+},
+
+{
+nombre:"🥤 Bebidas",
+
+productos:[
+
+{
+id:5,
+nombre:"Bebida de Avena",
+descripcion:"1 litro",
+precio:1.65,
+imagen:"https://via.placeholder.com/300x220?text=Avena"
+},
+
+{
+id:6,
+nombre:"Bebida de Arroz",
+descripcion:"1 litro",
+precio:2.29,
+imagen:"https://via.placeholder.com/300x220?text=Arroz"
+}
+
+]
+
+},
+
+{
+nombre:"🍫 Dulces",
+
+productos:[
+
+{
+id:7,
+nombre:"Chocolate 100%",
+descripcion:"100 gramos",
+precio:3.75,
+imagen:"https://via.placeholder.com/300x220?text=Cacao"
+}
+
+]
+
 }
 
 ];
@@ -1049,9 +1116,36 @@ function pintarCatalogo(){
 
 catalogo.innerHTML="";
 
-productos.forEach(p=>{
+categorias.forEach(categoria=>{
 
 catalogo.innerHTML+=`
+
+<div class="categoria">
+
+<h2 class="tituloCategoria">
+
+${categoria.nombre}
+
+</h2>
+
+<div class="productos-grid"
+
+id="cat${categoria.nombre.replace(/\s/g,'')}">
+
+</div>
+
+</div>
+
+`;
+
+const contenedor=document.getElementById(
+"cat"+categoria.nombre.replace(/\s/g,'')
+
+);
+
+categoria.productos.forEach(p=>{
+
+contenedor.innerHTML+=`
 
 <div class="producto">
 
@@ -1071,7 +1165,9 @@ ${p.precio.toFixed(2)} €
 
 </div>
 
-<button class="add"
+<button
+
+class="add"
 
 onclick="agregar(${p.id})">
 
@@ -1086,6 +1182,8 @@ onclick="agregar(${p.id})">
 </div>
 
 `;
+
+});
 
 });
 
