@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FRISS | Marketplace de comercios de Valladolid</title>
+<title>FRISS | Marketplace</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,383 +14,284 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-   .categoria{
-
-margin-bottom:45px;
-
-}
-
-.tituloCategoria{
-
-margin-bottom:25px;
-
-font-size:28px;
-
-font-weight:700;
-
-color:#222;
-
-}
-   #carritoItems button{
-
-background:#ef4444;
-
-border:none;
-
-color:white;
-
-border-radius:8px;
-
-padding:6px 10px;
-
-cursor:pointer;
-
-} 
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 :root{
 
-    --verde:#18B368;
-
-    --verde2:#0f9d58;
-
-    --gris:#f5f7fa;
-
-    --texto:#1f2937;
-
-    --borde:#e5e7eb;
-
-    --sombra:0 10px 35px rgba(0,0,0,.08);
+--verde:#17B26A;
+--verdeOscuro:#0C8F54;
+--gris:#F6F8FB;
+--texto:#1F2937;
+--borde:#E5E7EB;
 
 }
 
 body{
 
-    font-family:'Inter',sans-serif;
-
-    background:var(--gris);
-
-    color:var(--texto);
-
-}
-
-a{
-
-    text-decoration:none;
-
-    color:inherit;
-
-}
-
-img{
-
-    max-width:100%;
+font-family:'Inter',sans-serif;
+background:var(--gris);
+color:var(--texto);
 
 }
 
 .container{
 
-    width:94%;
-
-    max-width:1450px;
-
-    margin:auto;
+width:94%;
+max-width:1450px;
+margin:auto;
 
 }
 
 /***************************
-
 HEADER
-
 ***************************/
 
 header{
 
-    background:white;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:999;
-
-    box-shadow:0 2px 20px rgba(0,0,0,.05);
+position:sticky;
+top:0;
+background:white;
+z-index:999;
+box-shadow:0 5px 18px rgba(0,0,0,.05);
 
 }
 
 .topbar{
 
-    height:85px;
+height:82px;
 
-    display:flex;
+display:flex;
 
-    justify-content:space-between;
+align-items:center;
 
-    align-items:center;
+justify-content:space-between;
 
 }
 
 .logo{
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
 
-    gap:18px;
+gap:18px;
 
 }
 
 .logo img{
 
-    height:58px;
+height:60px;
 
 }
 
 .logo h1{
 
-    font-size:30px;
+font-size:30px;
 
-    font-weight:800;
+font-weight:800;
 
-    color:var(--verde);
+color:var(--verde);
 
 }
 
-/***************************
-
-BUSCADOR
-
-***************************/
-
 .search{
 
-    flex:1;
+flex:1;
 
-    margin:0 60px;
+margin:0 60px;
 
 }
 
 .search input{
 
-    width:100%;
+width:100%;
 
-    height:52px;
+height:54px;
 
-    border-radius:30px;
+border:none;
 
-    border:none;
+outline:none;
 
-    background:#f3f4f6;
+background:#F3F4F6;
 
-    padding:0 22px;
+border-radius:40px;
 
-    font-size:15px;
+padding:0 25px;
 
-    outline:none;
-
-}
-
-.header-right{
-
-    display:flex;
-
-    gap:15px;
-
-    align-items:center;
+font-size:16px;
 
 }
 
-.badge{
+.actions{
 
-    background:#f3f4f6;
+display:flex;
 
-    border-radius:25px;
+align-items:center;
 
-    padding:12px 20px;
+gap:15px;
 
-    font-size:14px;
+}
 
-    font-weight:600;
+.location{
+
+background:#F3F4F6;
+
+padding:12px 20px;
+
+border-radius:30px;
+
+font-weight:600;
 
 }
 
 .cart{
 
-    background:var(--verde);
+background:var(--verde);
 
-    color:white;
+color:white;
 
-    padding:14px 22px;
+padding:14px 24px;
 
-    border-radius:30px;
+border-radius:30px;
 
-    font-weight:700;
+font-weight:700;
+
+cursor:pointer;
 
 }
 
 /***************************
-
 HERO
-
 ***************************/
 
 .hero{
 
-    padding:70px 0 45px;
+padding:70px 0;
 
 }
 
 .hero h2{
 
-    font-size:42px;
+font-size:48px;
 
-    font-weight:800;
+font-weight:800;
 
-    margin-bottom:12px;
+margin-bottom:15px;
 
 }
 
 .hero p{
 
-    color:#6b7280;
+font-size:18px;
 
-    font-size:18px;
+color:#6B7280;
+
+margin-bottom:40px;
+
+max-width:700px;
 
 }
 
-/***************************
-
-TARJETAS
-
-***************************/
-
 .cards{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 
-    gap:25px;
-
-    margin-top:45px;
+gap:30px;
 
 }
 
 .card{
 
-    background:white;
+background:white;
 
-    border-radius:22px;
+border-radius:22px;
 
-    padding:30px;
+padding:30px;
 
-    box-shadow:var(--sombra);
+transition:.25s;
 
-    transition:.25s;
+box-shadow:0 10px 25px rgba(0,0,0,.06);
 
-    cursor:pointer;
+cursor:pointer;
 
 }
 
 .card:hover{
 
-    transform:translateY(-6px);
+transform:translateY(-6px);
 
 }
 
 .card img{
 
-    height:90px;
+height:90px;
 
-    object-fit:contain;
+object-fit:contain;
 
-    margin-bottom:20px;
+margin-bottom:20px;
 
 }
 
 .card h3{
 
-    font-size:22px;
+font-size:24px;
 
-    margin-bottom:10px;
+margin-bottom:10px;
 
 }
 
 .card p{
 
-    color:#6b7280;
+color:#6B7280;
 
-    line-height:1.5;
+line-height:1.6;
 
 }
 
-.btn{
+.card button{
 
-    display:inline-block;
+margin-top:25px;
 
-    margin-top:25px;
+width:100%;
 
-    background:var(--verde);
+border:none;
 
-    color:white;
+background:var(--verde);
 
-    padding:12px 22px;
+color:white;
 
-    border-radius:14px;
+padding:14px;
 
-    font-weight:700;
+border-radius:14px;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.card button:hover{
+
+background:var(--verdeOscuro);
 
 }
 
 /***************************
-
-RESPONSIVE
-
-***************************/
-
-@media(max-width:900px){
-
-.topbar{
-
-flex-direction:column;
-
-height:auto;
-
-padding:20px 0;
-
-gap:20px;
-
-}
-
-.search{
-
-margin:0;
-
-width:100%;
-
-}
-
-.hero h2{
-
-font-size:30px;
-
-}
-
-}
-/*********************************
-
 MARKETPLACE
-
-*********************************/
+***************************/
 
 .market{
 
-padding:60px 0;
+padding:20px 0 70px;
 
 }
 
@@ -398,15 +299,65 @@ padding:60px 0;
 
 display:grid;
 
-grid-template-columns:2fr 380px;
+grid-template-columns:260px 1fr 360px;
 
-gap:35px;
-
-align-items:start;
+gap:30px;
 
 }
 
-.productos-panel{
+/***************************
+SIDEBAR
+***************************/
+
+.sidebar{
+
+background:white;
+
+border-radius:22px;
+
+padding:25px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.sidebar h3{
+
+margin-bottom:20px;
+
+}
+
+.menu{
+
+list-style:none;
+
+}
+
+.menu li{
+
+padding:15px;
+
+border-radius:12px;
+
+margin-bottom:8px;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+.menu li:hover{
+
+background:#F3F4F6;
+
+}
+
+/***************************
+CATALOGO
+***************************/
+
+.catalogo{
 
 background:white;
 
@@ -414,121 +365,69 @@ border-radius:22px;
 
 padding:30px;
 
-box-shadow:var(--sombra);
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+min-height:500px;
 
 }
 
-.tabs{
-
-display:flex;
-
-gap:12px;
-
-margin:30px 0;
-
-flex-wrap:wrap;
-
-}
-
-.tab{
-
-background:#eef2f7;
-
-border:none;
-
-padding:12px 18px;
-
-border-radius:30px;
-
-cursor:pointer;
-
-font-weight:600;
-
-}
-
-.tab.activo{
-
-background:var(--verde);
-
-color:white;
-
-}
+/***************************
+CARRITO
+***************************/
 
 .carrito{
+
+background:white;
+
+border-radius:22px;
+
+padding:25px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
 
 position:sticky;
 
 top:110px;
 
-background:white;
-
-padding:30px;
-
-border-radius:22px;
-
-box-shadow:var(--sombra);
-
-}
-
-.carrito h2{
-
-margin-bottom:25px;
-
-}
-
-#carritoVacio{
-
-color:#9ca3af;
-
-font-size:15px;
-
-padding:20px 0;
-
-}
-
-.resumen{
-
-margin-top:30px;
-
-}
-
-.resumen div{
-
-display:flex;
-
-justify-content:space-between;
-
-margin:12px 0;
+height:fit-content;
 
 }
 
 .total{
 
-font-size:20px;
+margin-top:25px;
+
+padding-top:20px;
+
+border-top:1px solid #eee;
+
+display:flex;
+
+justify-content:space-between;
+
+font-size:22px;
 
 font-weight:700;
 
 }
 
-.comprar{
+.checkout{
 
 margin-top:20px;
 
 width:100%;
 
-padding:16px;
-
 border:none;
-
-border-radius:14px;
 
 background:var(--verde);
 
 color:white;
 
-font-size:16px;
+padding:16px;
 
-font-weight:700;
+border-radius:14px;
+
+font-size:16px;
 
 cursor:pointer;
 
@@ -542,142 +441,24 @@ grid-template-columns:1fr;
 
 }
 
-.carrito{
+.search{
 
-position:relative;
+margin:20px 0;
 
-top:0;
+}
+
+.topbar{
+
+flex-direction:column;
+
+height:auto;
+
+padding:20px;
 
 }
 
 }
-    /*********************************
 
-PRODUCTOS
-
-*********************************/
-
-.productos-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
-
-    gap:22px;
-
-}
-
-.producto{
-
-    background:white;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    transition:.25s;
-
-}
-
-.producto:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.producto img{
-
-    width:100%;
-
-    height:190px;
-
-    object-fit:cover;
-
-    background:#f5f5f5;
-
-}
-
-.producto-body{
-
-    padding:18px;
-
-}
-
-.producto-body h3{
-
-    font-size:18px;
-
-    margin-bottom:8px;
-
-}
-
-.producto-body p{
-
-    color:#6b7280;
-
-    font-size:14px;
-
-    line-height:1.4;
-
-    min-height:40px;
-
-}
-
-.precio-linea{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:18px;
-
-}
-
-.precio{
-
-    font-size:22px;
-
-    font-weight:700;
-
-    color:var(--verde);
-
-}
-
-.add{
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    border:none;
-
-    background:var(--verde);
-
-    color:white;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.add:hover{
-
-    transform:scale(1.1);
-
-    background:var(--verde2);
-
-}
 </style>
 
 </head>
@@ -702,13 +483,13 @@ PRODUCTOS
 
 <input
 type="text"
-placeholder="🔍 Buscar productos...">
+placeholder="🔍 Buscar productos, comercios...">
 
 </div>
 
-<div class="header-right">
+<div class="actions">
 
-<div class="badge">
+<div class="location">
 
 📍 Valladolid
 
@@ -716,7 +497,7 @@ placeholder="🔍 Buscar productos...">
 
 <div class="cart">
 
-🛒 0 productos
+🛒 Mi cesta
 
 </div>
 
@@ -734,13 +515,13 @@ placeholder="🔍 Buscar productos...">
 
 <h2>
 
-Compra en los comercios de tu ciudad
+Compra en el Mercado del Val con una sola entrega
 
 </h2>
 
 <p>
 
-Compra en varios comercios con un único pedido y una única entrega.
+Compra en distintos comercios del mercado y recibe todo junto en tu domicilio gracias a FRISS.
 
 </p>
 
@@ -754,15 +535,15 @@ Compra en varios comercios con un único pedido y una única entrega.
 
 <p>
 
-Carnicerías, pescaderías, fruterías y puestos tradicionales.
+Carnes, pescados, frutas, verduras y productos frescos.
 
 </p>
 
-<a href="#" class="btn">
+<button>
 
 Entrar
 
-</a>
+</button>
 
 </div>
 
@@ -778,11 +559,11 @@ Alimentación ecológica, bio y productos naturales.
 
 </p>
 
-<a href="#" class="btn">
+<button>
 
 Entrar
 
-</a>
+</button>
 
 </div>
 
@@ -794,15 +575,15 @@ Entrar
 
 <p>
 
-Productos artesanos y alimentos de Castilla y León.
+Productos artesanos de Castilla y León.
 
 </p>
 
-<a href="#" class="btn">
+<button>
 
 Entrar
 
-</a>
+</button>
 
 </div>
 
@@ -812,255 +593,79 @@ Entrar
 
 </section>
 
-<!-- ===================== -->
-<!-- MARKETPLACE -->
-<!-- ===================== -->
-
 <section class="market">
 
 <div class="container">
 
 <div class="market-layout">
 
+<div class="sidebar">
 
-<div id="catalogo">
-<div class="categoria">
+<h3>Categorías</h3>
 
-    <h2>🥥 Aceites y Condimentos Bio</h2>
+<ul class="menu">
 
-    <div class="productos-grid">
+<li>🥦 Verduras</li>
 
-        <div class="producto">
+<li>🍎 Frutas</li>
 
-            <div class="producto-body">
+<li>🥩 Carnes</li>
 
-                <h3>Vinagre de Manzana sin filtrar</h3>
+<li>🐟 Pescados</li>
 
-                <p>Botella de cristal · 750 ml · Voelkel</p>
+<li>🥛 Lácteos</li>
 
-                <div class="precio-linea">
+<li>🍞 Pan</li>
 
-                    <div class="precio">4,69 €</div>
+<li>☕ Cafés</li>
 
-                    <button class="add">+</button>
+<li>🥤 Bebidas</li>
 
-                </div>
+<li>🍫 Dulces</li>
 
-            </div>
+<li>🥥 Bio</li>
 
-        </div>
-
-        <div class="producto">
-
-            <div class="producto-body">
-
-                <h3>Vinagre de Granada sin filtrar</h3>
-
-                <p>Botella de cristal · 500 ml · Ecovinal</p>
-
-                <div class="precio-linea">
-
-                    <div class="precio">4,20 €</div>
-
-                    <button class="add">+</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="producto">
-
-            <div class="producto-body">
-
-                <h3>Mantequilla Ghee Easy</h3>
-
-                <p>Tarro · 245 g</p>
-
-                <div class="precio-linea">
-
-                    <div class="precio">12,65 €</div>
-
-                    <button class="add">+</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="producto">
-
-            <div class="producto-body">
-
-                <h3>Salsa de Soja Tamari</h3>
-
-                <p>Botella · 500 ml · Biocop</p>
-
-                <div class="precio-linea">
-
-                    <div class="precio">10,29 €</div>
-
-                    <button class="add">+</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</ul>
 
 </div>
 
-<div class="categoria">
+<div class="catalogo">
 
-    <h2>🥤 Bebidas Vegetales</h2>
+<h2>Bienvenido a FRISS</h2>
 
-    <div class="productos-grid">
+<p style="margin-top:15px;color:#6B7280;line-height:1.8;">
 
-        <div class="producto">
+Selecciona un comercio para comenzar tu compra.
 
-            <div class="producto-body">
+En el siguiente bloque construiremos aquí el catálogo de Vegg's con tarjetas de producto similares a Instacart.
 
-                <h3>Bebida de Avena</h3>
-
-                <p>Soria Natural · 1 litro</p>
-
-                <div class="precio-linea">
-
-                    <div class="precio">1,65 €</div>
-
-                    <button class="add">+</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="producto">
-
-            <div class="producto-body">
-
-                <h3>Bebida de Arroz</h3>
-
-                <p>Vitariz · 1 litro</p>
-
-                <div class="precio-linea">
-
-                    <div class="precio">2,29 €</div>
-
-                    <button class="add">+</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</p>
 
 </div>
-
-</div>
-
-<!-- ===================== -->
-<!-- MARKETPLACE -->
-<!-- ===================== -->
-
-<section class="market">
-
-<div class="container">
-
-<div class="market-layout">
-
-<!-- COLUMNA IZQUIERDA -->
-
-<div class="productos-panel">
-
-<h2>Explora los comercios</h2>
-
-<div class="tabs">
-
-<button class="tab activo">🥦 Vegg's</button>
-
-<button class="tab">🥩 Mercado del Val</button>
-
-<button class="tab">🧀 Mesetarios</button>
-
-</div>
-
-<div id="catalogo" class="productos-grid">
-
-    <!-- Los productos se cargarán con JavaScript -->
-
-</div>
-
-</div>
-
-<!-- CARRITO -->
 
 <aside class="carrito">
 
-<h2>🛒 Tu compra</h2>
+<h2>🛒 Tu cesta</h2>
 
-<div id="carritoVacio">
+<p style="margin-top:20px;color:#6B7280">
 
 Todavía no has añadido productos.
 
-</div>
-
-<div id="carritoItems"></div>
-
-<div class="resumen">
-
-<div>
-
-<span>Subtotal</span>
-
-<strong id="subtotal">
-
-0,00 €
-
-</strong>
-
-</div>
-
-<div>
-
-<span>Entrega</span>
-
-<strong>
-
-2,90 €
-
-</strong>
-
-</div>
-
-<hr>
+</p>
 
 <div class="total">
 
 <span>Total</span>
 
-<strong id="total">
-
-2,90 €
-
-</strong>
+<span>0,00 €</span>
 
 </div>
 
-<button class="comprar">
+<button class="checkout">
 
-Continuar pedido
+Continuar
 
 </button>
-
-</div>
 
 </aside>
 
@@ -1069,175 +674,6 @@ Continuar pedido
 </div>
 
 </section>
-
-<script>
-const categorias = [
-
-},
-
-{
-nombre:"🥤 Bebidas",
-
-productos:[
-
-{
-id:5,
-nombre:"Bebida de Avena",
-descripcion:"1 litro",
-precio:1.65,
-imagen:"https://via.placeholder.com/300x220?text=Avena"
-},
-
-{
-id:6,
-nombre:"Bebida de Arroz",
-descripcion:"1 litro",
-precio:2.29,
-imagen:"https://via.placeholder.com/300x220?text=Arroz"
-}
-
-]
-
-},
-
-{
-nombre:"🍫 Dulces",
-
-productos:[
-
-{
-id:7,
-nombre:"Chocolate 100%",
-descripcion:"100 gramos",
-precio:3.75,
-imagen:"https://via.placeholder.com/300x220?text=Cacao"
-}
-
-]
-
-}
-
-];
-
-let carrito=[];
-
-
-}
-
-function agregar(id){
-
-const producto=productos.find(p=>p.id===id);
-
-carrito.push(producto);
-
-actualizarCarrito();
-
-}
-
-function actualizarCarrito(){
-
-const lista=document.getElementById("carritoItems");
-
-const vacio=document.getElementById("carritoVacio");
-
-let subtotal=0;
-
-lista.innerHTML="";
-
-if(carrito.length===0){
-
-vacio.style.display="block";
-
-}else{
-
-vacio.style.display="none";
-
-}
-
-carrito.forEach((p,i)=>{
-
-subtotal+=p.precio;
-
-lista.innerHTML+=`
-
-<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;">
-
-<div>
-
-<strong>${p.nombre}</strong><br>
-
-<small>${p.precio.toFixed(2)} €</small>
-
-</div>
-
-<button onclick="eliminar(${i})">
-
-🗑
-
-</button>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("subtotal").innerHTML=subtotal.toFixed(2)+" €";
-
-document.getElementById("total").innerHTML=(subtotal+2.90).toFixed(2)+" €";
-
-}
-
-function eliminar(i){
-
-carrito.splice(i,1);
-
-actualizarCarrito();
-
-}
-
-pintarCatalogo();
-
-
-productos.forEach(p=>{
-
-catalogo.innerHTML+=`
-
-<div class="producto">
-
-<img src="${p.imagen}">
-
-<div class="producto-body">
-
-<h3>${p.nombre}</h3>
-
-<p>${p.descripcion}</p>
-
-<div class="precio-linea">
-
-<div class="precio">
-
-${p.precio.toFixed(2)} €
-
-</div>
-
-<button class="add">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-</script>
 
 </body>
 
