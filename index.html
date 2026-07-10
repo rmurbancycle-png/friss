@@ -46,6 +46,117 @@ max-width:1450px;
 margin:auto;
 
 }
+  /*==========================
+PRODUCTOS
+==========================*/
+
+.productos-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+
+gap:22px;
+
+}
+
+.producto{
+
+background:white;
+
+border:1px solid #ECECEC;
+
+border-radius:18px;
+
+overflow:hidden;
+
+transition:.25s;
+
+}
+
+.producto:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.producto img{
+
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+background:#fafafa;
+
+}
+
+.producto-body{
+
+padding:18px;
+
+}
+
+.producto h3{
+
+font-size:18px;
+
+margin-bottom:6px;
+
+}
+
+.producto p{
+
+color:#777;
+
+font-size:14px;
+
+margin-bottom:18px;
+
+}
+
+.precio-linea{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.precio{
+
+font-size:22px;
+
+font-weight:700;
+
+color:#17B26A;
+
+}
+
+.add{
+
+width:42px;
+
+height:42px;
+
+border:none;
+
+border-radius:50%;
+
+background:#17B26A;
+
+color:white;
+
+font-size:24px;
+
+cursor:pointer;
+
+}
 
 /***************************
 HEADER
@@ -631,15 +742,12 @@ Entrar
 
 <div class="catalogo">
 
-<h2>Bienvenido a FRISS</h2>
+<h2 style="margin-bottom:25px;">
+🥬 Vegg's · Alimentación ecológica
+</h2>
 
-<p style="margin-top:15px;color:#6B7280;line-height:1.8;">
-
-Selecciona un comercio para comenzar tu compra.
-
-En el siguiente bloque construiremos aquí el catálogo de Vegg's con tarjetas de producto similares a Instacart.
-
-</p>
+<div id="catalogoProductos" class="productos-grid">
+</div>
 
 </div>
 
@@ -674,6 +782,85 @@ Continuar
 </div>
 
 </section>
+  <script>
+
+const productos=[
+
+{
+id:1,
+nombre:"Vinagre de Manzana",
+descripcion:"750 ml · Voelkel",
+precio:4.69,
+imagen:"https://picsum.photos/300/220?random=1"
+},
+
+{
+id:2,
+nombre:"Vinagre de Granada",
+descripcion:"500 ml · Ecovinal",
+precio:4.20,
+imagen:"https://picsum.photos/300/220?random=2"
+},
+
+{
+id:3,
+nombre:"Aceite de Coco",
+descripcion:"550 g · Vegg's",
+precio:8.90,
+imagen:"https://picsum.photos/300/220?random=3"
+},
+
+{
+id:4,
+nombre:"Tamari Bio",
+descripcion:"500 ml",
+precio:10.29,
+imagen:"https://picsum.photos/300/220?random=4"
+}
+
+];
+
+const catalogo=document.getElementById("catalogoProductos");
+
+productos.forEach(p=>{
+
+catalogo.innerHTML+=`
+
+<div class="producto">
+
+<img src="${p.imagen}">
+
+<div class="producto-body">
+
+<h3>${p.nombre}</h3>
+
+<p>${p.descripcion}</p>
+
+<div class="precio-linea">
+
+<div class="precio">
+
+${p.precio.toFixed(2)} €
+
+</div>
+
+<button class="add">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+</script>
 
 </body>
 
