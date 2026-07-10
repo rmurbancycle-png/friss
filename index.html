@@ -1070,12 +1070,8 @@ Continuar pedido
 
 </section>
 
-
-
-
+<script>
 const categorias = [
-
-
 
 },
 
@@ -1125,82 +1121,6 @@ imagen:"https://via.placeholder.com/300x220?text=Cacao"
 
 let carrito=[];
 
-const catalogo=document.getElementById("catalogo");
-
-function pintarCatalogo(){
-
-catalogo.innerHTML="";
-
-categorias.forEach(categoria=>{
-
-catalogo.innerHTML+=`
-
-<div class="categoria">
-
-<h2 class="tituloCategoria">
-
-${categoria.nombre}
-
-</h2>
-
-<div class="productos-grid"
-
-id="cat${categoria.nombre.replace(/\s/g,'')}">
-
-</div>
-
-</div>
-
-`;
-
-const contenedor=document.getElementById(
-"cat"+categoria.nombre.replace(/\s/g,'')
-
-);
-
-categoria.productos.forEach(p=>{
-
-contenedor.innerHTML+=`
-
-<div class="producto">
-
-<img src="${p.imagen}">
-
-<div class="producto-body">
-
-<h3>${p.nombre}</h3>
-
-<p>${p.descripcion}</p>
-
-<div class="precio-linea">
-
-<div class="precio">
-
-${p.precio.toFixed(2)} €
-
-</div>
-
-<button
-
-class="add"
-
-onclick="agregar(${p.id})">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-});
 
 }
 
@@ -1278,9 +1198,6 @@ actualizarCarrito();
 
 pintarCatalogo();
 
-
-
-const catalogo=document.getElementById("catalogo");
 
 productos.forEach(p=>{
 
